@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OHub</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <h1> <%= link_to "OTechHub",articles_path%></h1>
+    <p>オリエンテーリングの技術記事+アナリシスの投稿サイト</p>
+    
+    <% if current_user %>
+      <%= link_to 'ログアウトするっほ', logout_path, method: :delete %>
+      <%= link_to "記事作成",new_article_path%>
+      <%= link_to "アカウント設定",edit_user_path(session[:user_id])%>
+    <% else %>
+      <%= link_to "ログインする方はこちら", login_path %>
+      
+    <% end %>
+    
+    <% if flash.present? %>
+      <% flash.each do |key, value| %>
+        <%= key %>
+        <%= value %>
+      <% end %>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>

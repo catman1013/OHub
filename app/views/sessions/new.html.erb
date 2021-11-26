@@ -1,0 +1,18 @@
+<h1>ログイン画面</h1>
+
+<%= form_with scope: :session ,local: true do |f|%>
+  <div class="form-group">
+    <%= f.label :first_name,"姓" %>
+    <%= f.text_field :first_name%>
+  </div>
+  <div class="form-group">
+    <%= f.label :email,"メールアドレス" %>
+    <%= f.text_field :email%>
+  </div>
+  <div class="form-group">
+    <%= f.label :password,"パスワード" %>
+    <%= f.text_field :password%>
+  </div>
+  <%= f.submit "ログインする"%>
+<% end%>
+<%= link_to "アカウント作成はこちら", new_user_path%>

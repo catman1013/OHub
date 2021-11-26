@@ -1,0 +1,39 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在しているので削除できません"
+          has_many: "%{record}が存在しているので削除できません"
+    models:
+      article: 記事
+    attributes:
+      article:
+        id: ID
+        title: タイトル
+        content: 内容
+        created_at: 登録日時
+        updated_at: 更新日時
+        orien_started_at: オリエンテーリングを始めた年
+        affilication: 所属
+        university: 出身大学
+        entered_university_at: 大学入学年度
+        favorite_terrain: 好きなテレイン
+        favorite_event: 好きな種目
+        something_to_say: 一言
+        achievement: 実績
+      user:
+        first_name: 姓
+        last_name: 名
+        email: メールアドレス
+        #admin: 管理者権限
+        password: パスワード
+        password_confirmation: パスワード(確認)
+        created_at: 登録日時
+        updated_at: 更新日時
+  helpers:
+    submit:
+      create: 登録するンゴ
+      submit: 記事を投稿するうほ
+      update: 更新する
