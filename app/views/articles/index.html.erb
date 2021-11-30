@@ -1,21 +1,31 @@
 <h1>メインページ</h1>
+
 <table>
   <tr>
     <th><%= t('article.title') %> </th>
     <th><%= t('user.first_name') %></th>
     <th><%= t('article.content') %></th>
+    <th><%= t('article.categoryr') %></th>
   </tr>
 
   <% @articles.each do |article|%>
     <tr>
-    <% @user=User.find(article.user_id)%>
-    <td><%= link_to article.title, article%></td>
-    <td><%= @user.first_name%></td>
-    <td><%= article.content.truncate(30)%></td>
-    <% if article.user_id = current_user.id %>
-    <td><%= link_to '編集',edit_article_path(article)%></td>
-    <td><%= link_to '削除',article, method: :delete%></td>
-    <% end%>
+      <td><%= article.title %></td>
+
+      <% if current_user && article.user_id == current_user.id %>
+        <td><%= article.user.first_name %></td>
+      <% else %>
+        <td><%= link_to article.user.first_name, user_path(article.user_id) %></td>
+      <% end%>
+
+      <td><%= article.content.truncate(30) %></td>
+      <td><%= article.category %></td>
+      <td><%= link_to '詳細', article %></td>
+      
+      <% if current_user && article.user_id == current_user.id %>
+        <td><%= link_to '編集', edit_article_path(article) %></td>
+        <td><%= link_to '削除', article, method: :delete %></td>
+      <% end %>
     </tr>
-  <%end%>
+  <% end %>
 </table>

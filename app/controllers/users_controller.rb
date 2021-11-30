@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def new
     @user = User.new
   end
@@ -8,9 +9,8 @@ class UsersController < ApplicationController
    
     if @user.save
       session[:user_id] = @user.id
-      redirect_to edit_user_path(@user),notice:"ユーザー#{@user.first_name}を登録しました。"
-    else
-      #binding.pry
+      redirect_to edit_user_path(@user), notice:"ユーザー#{@user.first_name}を登録しました。"
+    elses
       render :new
     end
   end
@@ -21,6 +21,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user_columns = User.column_names
+    @user_hash = @user.attributes
+
+    ['password_digest', 'created_at', 'updated_at', 'id'].each do |k|
+      @user_hash.delete(k)
+    end
   end
 
   def index
@@ -29,16 +35,15 @@ class UsersController < ApplicationController
 
   def update
     @user=User.find(params[:id])
-    #binding.pry
+    
     if @user.update(user_params)
-      redirect_to articles_path, notice:"ユーザー#{@user.first_name}を更新しました。"
+      redirect_to user_path, notice:"ユーザー#{@user.first_name}を更新しました。"
     else
-      flash[:notice] = "未記入の項目があるうほ"
       render :edit
     end
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :orien_started_at, :affilication, :university, :entered_university_at, :favorite_terrain, :favorite_event, :something_to_say, :achievement)
   end
 end
