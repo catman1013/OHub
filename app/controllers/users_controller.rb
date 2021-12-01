@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       redirect_to edit_user_path(@user), notice:"ユーザー#{@user.first_name}を登録しました。"
-    elses
+    else
       render :new
     end
   end
@@ -21,7 +21,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @user_columns = User.column_names
     @user_hash = @user.attributes
 
     ['password_digest', 'created_at', 'updated_at', 'id'].each do |k|

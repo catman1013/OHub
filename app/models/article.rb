@@ -2,8 +2,8 @@ class Article < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
 
-  enum category: [ :心, :技, :体]
-  enum tech_category: [ :コンタリング, :直進, :正置]
+  enum category: [ :mind, :technic, :physical]
+  enum tech_category: [ :contaring, :go_straight, :take_a_direction]
   
   belongs_to :user
 end

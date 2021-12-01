@@ -1,32 +1,3 @@
 <h1>編集画面</h1>
 
-<%= form_with model: @article, local: true do |f| %>
-  <%= render 'layouts/error_messages', model: f.object %>
-  <div class="form-group">
-    <%= f.label :title, "タイトル" %>
-    <%= f.text_field :title %>
-  </div>
-  <div class="form-group">
-    <%= f.label :content, "本文" %>
-    <%= f.text_area :content %>
-  </div>
-  <div class="radio-group">
-    <%= f.label :category %>
-    <% Article.categories.each do |text, value| %>
-      <div>
-        <%= f.radio_button :category, text %>
-        <%= f.label :category, text, value: value %>
-      </div>
-    <% end %>
-  </div>
-  <div class="radio-group">
-    <%= f.label :tech_category %>
-    <% Article.tech_categories.each do |text, value| %>
-      <div>
-        <%= f.radio_button :tech_category, text %>
-        <%= f.label :tech_category, text, value: value %>
-      </div>
-    <% end %>
-  </div>
-  <%= f.submit '記事投稿' %>
-<% end %>
+<%= render 'layouts/article_form' %>
