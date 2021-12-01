@@ -22,7 +22,7 @@
       <td><%= article.category %></td>
       <td><%= link_to '詳細', article %></td>
       
-      <% if writer_or_not(article) %>
+      <% if article.author_or_not? %>
         <td><%= link_to '編集', edit_article_path(article) %></td>
         <td><%= link_to '削除', article, method: :delete %></td>
       <% end %>

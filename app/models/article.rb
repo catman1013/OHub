@@ -6,4 +6,8 @@ class Article < ApplicationRecord
   enum tech_category: [ :contaring, :go_straight, :take_a_direction]
   
   belongs_to :user
+  
+  def author_or_not?
+    ApplicationController.helpers.current_user && self.user_id == ApplicationController.helpers.current_user.id
+  end
 end

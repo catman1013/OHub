@@ -3,18 +3,45 @@
 <% end %>
 
 <table>
-  <% @user_hash.each do |key, value| %>
-    <% if value.class == Date %>
-      <tr>
-        <td><%= key %></td>
-        <td><%= value.year %></td>
-      </tr>
-    <% else %>
-      <tr>
-        <td><%= key %></td>
-        <td><%= value %></td>
-      </tr>
-    <% end %>
-  <% end %>
+  <tr>
+    <td><p>姓</p></td>
+    <td><%= @user.first_name %></td>
+  </tr>
+  <tr>
+    <td><p>名</p></td>
+    <td><%= @user.last_name %></td>
+  </tr>
+  <tr>
+    <td><p>オリエン開始年</p></td>
+    <td><%= @user.orien_started_at %></td>
+  </tr>
+  <tr>
+    <td><p>所属</p></td>
+    <td><%= @user.affilication %></td>
+  </tr>
+  <tr>
+    <td><p>出身大学</p></td>
+    <td><%= @user.university %></td>
+  </tr>
+  <tr>
+    <td><p>大学入学年度</p></td>
+    <td><%= @user.entered_university_at %></td>
+  </tr>
+  <tr>
+    <td><p>好きなテレイン</p></td>
+    <td><%= @user.favorite_terrain %></td>
+  </tr>
+  <tr>
+    <td><p>好きな種目</p></td>
+    <td><%= @user.favorite_event %></td>
+  </tr>
+  <tr>
+    <td><p>主な実績</p></td>
+    <td><%= @user.achievement %></td>
+  </tr>
+  <tr>
+    <td><p>一言コメント</p></td>
+    <td><%= @user.something_to_say %></td>
+  </tr>
 </table>
 

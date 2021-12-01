@@ -21,11 +21,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @user_hash = @user.attributes
-
-    ['password_digest', 'created_at', 'updated_at', 'id'].each do |k|
-      @user_hash.delete(k)
-    end
   end
 
   def index
