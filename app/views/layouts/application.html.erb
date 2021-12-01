@@ -14,20 +14,18 @@
     <p>オリエンテーリングの技術記事+アナリシスの投稿サイト</p>
     
     <% if current_user %>
+      <%= current_user.last_name %>
       <%= link_to 'ログアウトするっほ', logout_path, method: :delete %>
-      <%= link_to "記事作成",new_article_path%>
-      <%= link_to "アカウント設定",edit_user_path(session[:user_id])%>
+      <%= link_to "記事作成",new_article_path %>
+      <%= link_to "ユーザープロフィール",user_path(session[:user_id]) %>
     <% else %>
       <%= link_to "ログインする方はこちら", login_path %>
-      
+    <% end %>
+
+    <% if flash %>
+      <%= notice %>
     <% end %>
     
-    <% if flash.present? %>
-      <% flash.each do |key, value| %>
-        <%= key %>
-        <%= value %>
-      <% end %>
-    <% end %>
     <%= yield %>
   </body>
 </html>

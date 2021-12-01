@@ -1,18 +1,20 @@
 <h1>ログイン画面</h1>
 
-<%= form_with scope: :session ,local: true do |f|%>
+<%= form_with scope: :session , local: true do |f| %>
+
+  <%= render 'layouts/error_messages', model: f.object %>
   <div class="form-group">
-    <%= f.label :first_name,"姓" %>
-    <%= f.text_field :first_name%>
+    <%= f.label :first_name, "姓" %>
+    <%= f.text_field :first_name %>
   </div>
   <div class="form-group">
-    <%= f.label :email,"メールアドレス" %>
-    <%= f.text_field :email%>
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.text_field :email %>
   </div>
   <div class="form-group">
-    <%= f.label :password,"パスワード" %>
-    <%= f.text_field :password%>
+    <%= f.label :password, "パスワード" %>
+    <%= f.text_field :password %>
   </div>
-  <%= f.submit "ログインする"%>
-<% end%>
-<%= link_to "アカウント作成はこちら", new_user_path%>
+  <%= f.submit "ログインする" %>
+<% end %>
+<%= link_to "アカウント作成はこちら", new_user_path %>

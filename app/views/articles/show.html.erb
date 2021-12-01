@@ -1,6 +1,7 @@
-<%= @article.title%>
-<%= @article.content%>
+<%= @article.title %>
+<%= @article.content %>
 
-<%= link_to '編集', edit_article_path %>
-
-#test2
+<% if @article.author_or_not? %>
+  <%= link_to '編集', edit_article_path %>
+  <%= link_to '削除', @article, method: :delete %>
+<% end %>

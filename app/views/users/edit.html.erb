@@ -1,59 +1,51 @@
 <h1>アカウント詳細設定</h1>
-<%= form_with model: @user,local: true do |f|%>
+
+<%= form_with model: @user, local: true do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+
   <div class="form-group">
-    <%= f.label :first_name,"姓" %>
-    <%= f.text_field :first_name%>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
   </div>
   <div class="form-group">
-    <%= f.label :last_name,"名" %>
-    <%= f.text_field :last_name%>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
   </div>
   <div class="form-group">
-    <%= f.label :email,"メールアドレス" %>
-    <%= f.text_field :email%>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
   </div>
   <div class="form-group">
-    
+    <%= f.label :orien_started_at %>
+    <%= f.date_select :orien_started_at, start_year: 1960, end_year: Time.now.year, discard_month: true, discard_day:true, include_blank: "選択して下さい" %>
   </div>
   <div class="form-group">
-    <%= f.label :orien_started_at,"オリエン開始年" %>
-    <%= f.text_field :orien_started_at%>
+    <%= f.label :affilication %>
+    <%= f.text_field :affilication %>
   </div>
   <div class="form-group">
-    <%= f.label :affilication,"所属" %>
-    <%= f.text_field :affilication%>
+    <%= f.label :university %>
+    <%= f.text_field :university %>
   </div>
   <div class="form-group">
-    <%= f.label :university,"出身大学" %>
-    <%= f.text_field :university%>
+    <%= f.label :entered_university_at %>
+    <%= f.date_select :entered_university_at, start_year: 1960, end_year: Time.now.year, discard_month: true, discard_day:true, include_blank: "選択して下さい" %>
   </div>
   <div class="form-group">
-    <%= f.label :entered_university_at,"大学入学年度" %>
-    <%= f.text_field :entered_university_at%>
+    <%= f.label :favorite_terrain %>
+    <%= f.text_field :favorite_terrain %>
   </div>
-  <div class="form-group">
-    <%= f.label :favorite_terrain,"好きなテレイン" %>
-    <%= f.text_field :favorite_terrain%>
-  </div>
-  <div class="form-group">
   <div class="radio-group">
-    <%= f.radio_button :favorite_event, "スプリント"%>
-    <%= f.label :favorite_event,"スプリント" %>
-    <%= f.radio_button :favorite_event, "ミドル"%>
-    <%= f.label :favorite_event,"ミドル" %>
-    <%= f.radio_button :favorite_event, "ロング"%>
-    <%= f.label :favorite_event,"ロング" %>
-    <%= f.radio_button :favorite_event, "リレー"%>
-    <%= f.label :favorite_event,"リレー" %>
-  </div>
+    <%= f.label :favorite_event %>
+    <%= f.collection_radio_buttons :favorite_event, User.favorite_events, :first, :last %>
   </div>
   <div class="form-group">
-    <%= f.label :achievement,"主な実績" %>
-    <%= f.text_field :achievement%>
+    <%= f.label :achievement %>
+    <%= f.text_field :achievement %>
   </div>
   <div class="form-group">
-    <%= f.label :something_to_say,"一言" %>
-    <%= f.text_field :something_to_say%>
+    <%= f.label :something_to_say %>
+    <%= f.text_field :something_to_say %>
   </div>
-  <%= f.submit '更新する'%>
+  <%= f.submit '更新する' %>
 <% end %>
