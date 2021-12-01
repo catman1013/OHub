@@ -8,6 +8,7 @@ class Article < ApplicationRecord
   belongs_to :user
   
   def author_or_not?
-    ApplicationController.helpers.current_user && self.user_id == ApplicationController.helpers.current_user.id
+    true
+    #ApplicationController.helpers.current_user && self.user_id == ApplicationController.helpers.current_user.id
   end
 end
