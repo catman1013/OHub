@@ -17,7 +17,7 @@
       <%= current_user.last_name %>
       <%= link_to 'ログアウトするっほ', logout_path, method: :delete %>
       <%= link_to "記事作成",new_article_path %>
-      <%= link_to "ユーザープロフィール",user_path(session[:user_id]) %>
+      <%= link_to "マイプロフィール",user_path(session[:user_id]) %>
     <% else %>
       <%= link_to "ログインする方はこちら", login_path %>
     <% end %>

@@ -10,7 +10,7 @@
 
   <% @articles.each do |article|%>
     <tr>
-      <td><%= article.title %></td>
+      <td><%= article.title.truncate(20) %></td>
 
       <% if current_user && article.user_id == current_user.id %>
         <td><%= article.user.first_name %></td>
@@ -22,7 +22,7 @@
       <td><%= article.category %></td>
       <td><%= link_to '詳細', article %></td>
       
-      <% if article.author_or_not? %>
+      <% if author_or_not?(article) %>
         <td><%= link_to '編集', edit_article_path(article) %></td>
         <td><%= link_to '削除', article, method: :delete %></td>
       <% end %>
