@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @comment = Comment.new
     @comments = @article.comments.includes(:user)
+    @stamps_count = @article.count_the_number_of_each_type_of_stamps
   end
 
   def new
@@ -50,6 +51,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
+    binding.pry
     params.require(:article).permit(:title, :content, :category)
   end
 

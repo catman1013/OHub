@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :users
   resources :articles do
     resources :comments, only: [:create, :edit, :destroy]
+    resource :stamps, only: [:create, :destroy]
+    resource :bookmarks, only: [:create, :destroy]
   end
 
   root to: "users#new"
