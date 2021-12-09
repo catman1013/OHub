@@ -1,7 +1,84 @@
-<%= @article.title %>
-<%= @article.content %>
+<p><%= @article.title %></p>
+<p><%= @article.content %></p>
 
-<% if @article.author_or_not? %>
+<% if author_or_not?(@article) %>
   <%= link_to '編集', edit_article_path %>
   <%= link_to '削除', @article, method: :delete %>
+<% end %>
+
+<div class="comment">
+  <h4>コメント一覧</h4> 
+
+  <table>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.content %></td>
+
+        <% if author_or_not?(comment) %>
+          <td><%= comment.user.first_name %></td>
+        <% else %>
+          <td><%= link_to comment.user.first_name, user_path(comment.user_id) %></td>
+        <% end %>
+
+        <td><%= comment.created_at %></td>
+
+        <% if author_or_not?(comment) %>
+          <td><%= link_to '削除', article_comment_path(@article, comment), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<% if current_user %>
+  <h4>コメント</h4>
+  <%= form_with model: [@article, @comment], local: true do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    <div class="form-group">
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+    <%= f.submit 'コメント投稿' %>
+  <% end %>
+<% end %>
+
+<% (0..2).each do |n| %>
+  <% if @article.stamped_by?(current_user, Stamp.types.to_a[n][0]) %>
+    <%= link_to Stamp.types.to_a[n][0]+"スタンプ消去", article_stamps_path(@article, type: Stamp.types.to_a[n][0]), method: :delete %>
+  <% else %>
+    <%= link_to Stamp.types.to_a[n][0], article_stamps_path(@article, type: Stamp.types.to_a[n][0]), method: :post %>
+  <% end %>
+    <%= @stamps_count[n] %>
+<% end %>
+
+<%
+=begin%>
+  リファクタリングしない場合
+<%
+=end%>
+<% if @article.stamped_by?(current_user, '面白い') %>
+  <%= link_to '面白いスタンプ消去', article_stamps_path(@article, type: '面白い'), method: :delete %>
+<% else %>
+  <%= link_to '面白い', article_stamps_path(@article, type: '面白い'), method: :post %>
+<% end %>
+<%= @stamps_count[0] %>
+
+<% if @article.stamped_by?(current_user, '目から鱗') %>
+  <%= link_to '目から鱗スタンプ消去', article_stamps_path(@article, type: '目から鱗'), method: :delete %>
+<% else %>
+  <%= link_to '目から鱗', article_stamps_path(@article, type: '目から鱗'), method: :post %>
+<% end %>
+<%= @stamps_count[1] %>
+
+<% if @article.stamped_by?(current_user, 'ゴリラ') %>
+  <%= link_to 'ゴリラスタンプ消去', article_stamps_path(@article, type: 'ゴリラ'), method: :delete %>
+<% else %>
+  <%= link_to 'ゴリラ', article_stamps_path(@article, type: 'ゴリラ'), method: :post %>
+<% end %>
+<%= @stamps_count[2] %>
+
+<% if @article.bookmarked_by?(current_user) %>
+  <%= link_to "ブックマーク外しちゃう", article_bookmarks_path(@article), method: :delete %>
+<% else %>
+  <%= link_to "ブックマークしちゃう", article_bookmarks_path(@article), method: :post %>
 <% end %>

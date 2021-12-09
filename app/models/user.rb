@@ -17,5 +17,8 @@ class User < ApplicationRecord
   
   enum favorite_event: [ :スプリント, :ミドル , :ロング, :リレー ]
   
-  has_many :articles
+  has_many :articles, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :stamps, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 end

@@ -1,46 +1,48 @@
 <% if current_user.id == @user.id %>
   <%= link_to "アカウント設定", edit_user_path(session[:user_id]) %>
+  <h1>マイプロフィール</h1>
 <% end %>
 
+ <h1><%= @user.first_name+"さんのプロフィール" %></h1>
 <table>
   <tr>
-    <td><p>姓</p></td>
+    <td>姓</td>
     <td><%= @user.first_name %></td>
   </tr>
   <tr>
-    <td><p>名</p></td>
+    <td>名</td>
     <td><%= @user.last_name %></td>
   </tr>
   <tr>
-    <td><p>オリエン開始年</p></td>
+    <td>オリエン開始年</td>
     <td><%= @user.orien_started_at %></td>
   </tr>
   <tr>
-    <td><p>所属</p></td>
+    <td>所属</td>
     <td><%= @user.affilication %></td>
   </tr>
   <tr>
-    <td><p>出身大学</p></td>
+    <td>出身大学</td>
     <td><%= @user.university %></td>
   </tr>
   <tr>
-    <td><p>大学入学年度</p></td>
+    <td>大学入学年度</td>
     <td><%= @user.entered_university_at %></td>
   </tr>
   <tr>
-    <td><p>好きなテレイン</p></td>
+    <td>好きなテレイン</td>
     <td><%= @user.favorite_terrain %></td>
   </tr>
   <tr>
-    <td><p>好きな種目</p></td>
+    <td>好きな種目</td>
     <td><%= @user.favorite_event %></td>
   </tr>
   <tr>
-    <td><p>主な実績</p></td>
+    <td>主な実績</td>
     <td><%= @user.achievement %></td>
   </tr>
   <tr>
-    <td><p>一言コメント</p></td>
+    <td>一言コメント</td>
     <td><%= @user.something_to_say %></td>
   </tr>
 </table>

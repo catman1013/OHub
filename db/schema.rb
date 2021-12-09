@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_035201) do
+ActiveRecord::Schema.define(version: 2021_12_04_001359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,10 +21,37 @@ ActiveRecord::Schema.define(version: 2021_11_26_035201) do
     t.boolean "released"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "tech_category"
+    t.integer "tech_category"
     t.integer "category", default: 0, null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "article_id"
+    t.datetime "created_at", null: false
+    t.index ["article_id"], name: "index_bookmarks_on_article_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content", null: false
+    t.bigint "user_id"
+    t.bigint "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_comments_on_article_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "stamps", force: :cascade do |t|
+    t.integer "type", null: false
+    t.bigint "user_id"
+    t.bigint "article_id"
+    t.datetime "created_at", null: false
+    t.index ["article_id"], name: "index_stamps_on_article_id"
+    t.index ["user_id"], name: "index_stamps_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,11 +65,17 @@ ActiveRecord::Schema.define(version: 2021_11_26_035201) do
     t.string "affilication"
     t.string "university"
     t.date "entered_university_at"
-    t.integer "favorite_terrain"
-    t.string "favorite_event"
+    t.string "favorite_terrain"
+    t.integer "favorite_event"
     t.string "something_to_say", limit: 80
     t.text "achievement"
   end
 
   add_foreign_key "articles", "users"
+  add_foreign_key "bookmarks", "articles"
+  add_foreign_key "bookmarks", "users"
+  add_foreign_key "comments", "articles"
+  add_foreign_key "comments", "users"
+  add_foreign_key "stamps", "articles"
+  add_foreign_key "stamps", "users"
 end
