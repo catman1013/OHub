@@ -1,0 +1,22 @@
+<div class="comment">
+
+  <table>
+    <% comments.each do |comment| %>
+      <tr>
+        <td><%= comment.content %></td>
+
+        <% if author_or_not?(comment) %>
+          <td><%= comment.user.first_name %></td>
+        <% else %>
+          <td><%= link_to comment.user.first_name, user_path(comment.user_id) %></td>
+        <% end %>
+
+        <td><%= comment.created_at %></td>
+
+        <% if author_or_not?(comment) %>
+          <td><%= link_to '削除', article_comment_path(article, comment), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>

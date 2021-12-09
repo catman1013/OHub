@@ -4,6 +4,7 @@ class Article < ApplicationRecord
 
   enum category: [ :mind, :technic, :physical]
   enum tech_category: [ :contaring, :go_straight, :take_a_direction]
+  enum status: [:draft, :published]
   
   belongs_to :user
   has_many :comments, dependent: :destroy
@@ -24,5 +25,9 @@ class Article < ApplicationRecord
       stamp_count << stamps.where("type = #{n}").count
     end
     stamp_count
+  end
+
+  def search_by_article_status(status_value)
+    self.where(status: status_value)
   end
 end

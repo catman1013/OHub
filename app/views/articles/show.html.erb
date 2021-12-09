@@ -6,47 +6,27 @@
   <%= link_to '削除', @article, method: :delete %>
 <% end %>
 
-<div class="comment">
-  <h4>コメント一覧</h4> 
-
-  <table>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.content %></td>
-
-        <% if author_or_not?(comment) %>
-          <td><%= comment.user.first_name %></td>
-        <% else %>
-          <td><%= link_to comment.user.first_name, user_path(comment.user_id) %></td>
-        <% end %>
-
-        <td><%= comment.created_at %></td>
-
-        <% if author_or_not?(comment) %>
-          <td><%= link_to '削除', article_comment_path(@article, comment), method: :delete %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </table>
-</div>
-
-<% if current_user %>
+<div class="comment-container">
   <h4>コメント</h4>
-  <%= form_with model: [@article, @comment], local: true do |f| %>
-    <%= render 'layouts/error_messages', model: f.object %>
-    <div class="form-group">
-      <%= f.label :content %>
-      <%= f.text_area :content %>
-    </div>
-    <%= f.submit 'コメント投稿' %>
+  <%= render 'layouts/comment_list', { comments: @comments, article: @article } %>
+
+  <% if current_user %>
+    <%= form_with model: [@article, @comment], local: true do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      <div class="form-group">
+        <%= f.label :content %>
+        <%= f.text_area :content %>
+      </div>
+      <%= f.submit 'コメント投稿' %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
 <% (0..2).each do |n| %>
   <% if @article.stamped_by?(current_user, Stamp.types.to_a[n][0]) %>
-    <%= link_to Stamp.types.to_a[n][0]+"スタンプ消去", article_stamps_path(@article, type: Stamp.types.to_a[n][0]), method: :delete %>
+    <%= button_to Stamp.types.to_a[n][0]+"スタンプ消去", article_stamps_path(@article, type: Stamp.types.to_a[n][0]), method: :delete %>
   <% else %>
-    <%= link_to Stamp.types.to_a[n][0], article_stamps_path(@article, type: Stamp.types.to_a[n][0]), method: :post %>
+    <%= button_to Stamp.types.to_a[n][0], article_stamps_path(@article, type: Stamp.types.to_a[n][0]) %>
   <% end %>
     <%= @stamps_count[n] %>
 <% end %>
@@ -54,6 +34,7 @@
 <%
 =begin%>
   リファクタリングしない場合
+  ボタンではなくリンク
 <%
 =end%>
 <% if @article.stamped_by?(current_user, '面白い') %>

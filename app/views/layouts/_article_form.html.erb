@@ -17,5 +17,9 @@
     <%= f.label :tech_category %>
     <%= f.collection_radio_buttons :tech_category, Article.categories, :first, :last %>
   </div>
+  <div class="selectbox_group">
+  <%= f.label :status %>
+    <%= f.select :status, Article.statuses.to_a, selected: @article.status %>
+  </div>
   <%= f.submit '記事投稿' %>
 <% end %>

@@ -1,0 +1,42 @@
+<h1>マイページ</h1>
+<h2>記事一覧</h2>
+
+<%= button_to "全ての記事を表示", user_mypages_path(current_user), method: :get %>
+<%= button_to t('enums.article.status.published')+"記事のみ表示", { controller: :mypages, action: :show }, params: { status: 'published' }, method: :get %>
+<%= button_to t('enums.article.status.draft')+"記事のみ表示", { controller: :mypages, action: :show }, params: { status: 'draft' }, method: :get %>
+
+<table>
+  <tr>
+    <th><%= t('article.title') %> </th>
+    <th><%= t('user.first_name') %></th>
+    <th><%= t('article.content') %></th>
+    <th><%= t('article.category') %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>コメント</th>
+  </tr>
+
+  <% @articles.each do |article|%>
+    <tr>
+      <td><%= article.title.truncate(20) %></td>
+
+      <% if current_user && article.user_id == current_user.id %>
+        <td><%= article.user.first_name %></td>
+      <% else %>
+        <td><%= link_to article.user.first_name, user_path(article.user_id) %></td>
+      <% end %>
+
+      <td><%= article.content.truncate(30) %></td>
+      <td><%= article.category %></td>
+      <td><%= link_to '詳細', article %></td>
+      
+      <% if author_or_not?(article) %>
+        <td><%= link_to '編集', edit_article_path(article) %></td>
+        <td><%= link_to '削除', article, method: :delete %></td>
+      <% end %>
+
+      <th><%= render 'layouts/comment_list', { comments: article.comments, article: article} %></th>
+    </tr>
+  <% end %>
+</table>
