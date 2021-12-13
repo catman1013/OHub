@@ -10,16 +10,16 @@
   </head>
 
   <body>
-    <h1> <%= link_to "OTechHub",articles_path%></h1>
+    <h1> <%= link_to 'OTechHub',articles_path%></h1>
     <p>オリエンテーリングの技術記事+アナリシスの投稿サイト</p>
     
     <% if current_user %>
       <%= current_user.last_name %>
       <%= link_to 'ログアウトするっほ', logout_path, method: :delete %>
-      <%= link_to "記事作成",new_article_path %>
-      <%= link_to "マイプロフィール",user_path(session[:user_id]) %>
+      <%= link_to '記事作成',new_article_path %>
+      <%= link_to 'マイプロフィール',user_path(session[:user_id]) %>
     <% else %>
-      <%= link_to "ログインする方はこちら", login_path %>
+      <%= link_to 'ログインする方はこちら', login_path %>
     <% end %>
 
     <% if flash %>
