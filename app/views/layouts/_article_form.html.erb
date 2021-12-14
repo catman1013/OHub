@@ -19,7 +19,7 @@
   </div>
   <div class="selectbox_group">
   <%= f.label :status %>
-    <%= f.select :status, Article.statuses.to_a, selected: @article.status %>
+    <%= f.collection_select :status, Article.statuses, :first, :first %>
   </div>
   <%= f.submit '記事投稿' %>
 <% end %>

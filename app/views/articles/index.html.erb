@@ -5,14 +5,14 @@
     <th><%= t('article.title') %> </th>
     <th><%= t('user.first_name') %></th>
     <th><%= t('article.content') %></th>
-    <th><%= t('article.categoryr') %></th>
+    <th><%= t('article.category') %></th>
   </tr>
 
   <% @articles.each do |article|%>
     <tr>
       <td><%= article.title.truncate(20) %></td>
 
-      <% if current_user && article.user_id == current_user.id %>
+      <% if author_or_not?(article) %>
         <td><%= article.user.first_name %></td>
       <% else %>
         <td><%= link_to article.user.first_name, user_path(article.user_id) %></td>
