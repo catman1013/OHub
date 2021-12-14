@@ -26,8 +26,4 @@ class Article < ApplicationRecord
     end
     stamp_count
   end
-
-  def search_by_article_status(status_value)
-    self.where(status: status_value)
-  end
 end
