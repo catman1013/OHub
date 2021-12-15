@@ -3,18 +3,18 @@
 <%= form_with scope: :session , local: true do |f| %>
 
   <%= render 'layouts/error_messages', model: f.object %>
-  <div class="form-group">
-    <%= f.label :first_name, "姓" %>
+  <div class='form-group'>
+    <%= f.label :first_name, '姓' %>
     <%= f.text_field :first_name %>
   </div>
-  <div class="form-group">
-    <%= f.label :email, "メールアドレス" %>
+  <div class='form-group'>
+    <%= f.label :email, 'メールアドレス' %>
     <%= f.text_field :email %>
   </div>
-  <div class="form-group">
-    <%= f.label :password, "パスワード" %>
+  <div class='form-group'>
+    <%= f.label :password, 'パスワード' %>
     <%= f.text_field :password %>
   </div>
-  <%= f.submit "ログインする" %>
+  <%= f.submit 'ログインする' %>
 <% end %>
-<%= link_to "アカウント作成はこちら", new_user_path %>
+<%= link_to 'アカウント作成はこちら', new_user_path %>

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:edit, :show, :update]
+  before_action :correct_user, only: [:edit, :update]
 
   def new
     @user = User.new
@@ -9,18 +11,16 @@ class UsersController < ApplicationController
    
     if @user.save
       session[:user_id] = @user.id
-      redirect_to edit_user_path(@user), notice:"ユーザー#{@user.first_name}を登録しました。"
+      redirect_to edit_user_path(@user), notice: "ユーザー#{@user.first_name}を登録しました。"
     else
       render :new
     end
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def index
@@ -28,10 +28,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user=User.find(params[:id])
-    
     if @user.update(user_params)
-      redirect_to user_path, notice:"ユーザー#{@user.first_name}を更新しました。"
+      redirect_to user_path, notice: "ユーザー#{@user.first_name}を更新しました。"
     else
       render :edit
     end
@@ -39,5 +37,15 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :orien_started_at, :affilication, :university, :entered_university_at, :favorite_terrain, :favorite_event, :something_to_say, :achievement)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def correct_user
+    unless current_user.id == @user.id
+      redirect_to root_path, notice: 'はじいたうほ'
+    end
   end
 end

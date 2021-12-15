@@ -12,7 +12,7 @@
     <tr>
       <td><%= article.title.truncate(20) %></td>
 
-      <% if current_user && article.user_id == current_user.id %>
+      <% if author_or_not?(article) %>
         <td><%= article.user.first_name %></td>
       <% else %>
         <td><%= link_to article.user.first_name, user_path(article.user_id) %></td>

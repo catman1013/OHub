@@ -1,21 +1,24 @@
 class BookmarksController < ApplicationController
+  before_action :set_article_with_article_id
+
   def create
-    @article = Article.find(params[:article_id])
     bookmark = @article.bookmarks.new(user_id: current_user.id)
+
     if bookmark.save
-      redirect_back(fallback_location: root_path)
+      flash[:notice] = 'ブックマークに登録しました'
     else
-      redirect_back(fallback_location: root_path)
+      flash[:notice] = 'ブックマークの登録に失敗しました'
     end
+    
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
-    @article = Article.find(params[:article_id])
     bookmark = @article.bookmarks.find_by(user_id: current_user.id)
     
-    if bookmark.destroy
-      redirect_back(fallback_location: root_path)
-    else
+    if bookmark.user_id == current_user.id
+      bookmark.destroy
+      flash[:notice] = 'ブックマークを解除しました'
       redirect_back(fallback_location: root_path)
     end
   end
