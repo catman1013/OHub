@@ -1,23 +1,31 @@
 class StampsController < ApplicationController
+  before_action :set_article_with_article_id
+
   def create
-    @article = Article.find(params[:article_id])
-    stamp = @article.stamps.new(type: params[:type], user_id: current_user.id)
+    stamp = @article.stamps.new(stamp_params.merge(user_id: current_user.id))
 
     if stamp.save
-      redirect_back(fallback_location: root_path)
+      flash[:notice] = "#{stamp[:type]}スタンプを押したっぴ"
     else
+      flash[:notice] = 'スタンプ押しに失敗したうほ'
+    end
+
+    redirect_back(fallback_location: root_path)
+  end
+
+  def destroy
+    stamp = @article.stamps.find_by(type: params[:type], user_id: current_user.id)
+
+    if stamp.user_id == current_user.id
+      stamp.destroy
+      flash[:notice] = "#{stamp[:type]}スタンプを取り消しました"
       redirect_back(fallback_location: root_path)
     end
   end
 
-  def destroy
-    @article = Article.find(params[:article_id])
-    stamp = @article.stamps.find_by(type: params[:type], user_id: current_user.id)
-
-    if stamp.destroy
-      redirect_back(fallback_location: root_path)
-    else
-      redirect_back(fallback_location: root_path)
-    end
+  private
+  
+  def stamp_params
+    params.permit(:type)
   end
 end

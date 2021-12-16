@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
   def author_or_not?(argument)
     current_user && argument.user_id == current_user.id
   end
+
+  def set_article_with_article_id
+    @article = Article.find(params[:article_id])
+  end
 end

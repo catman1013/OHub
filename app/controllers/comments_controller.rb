@@ -1,25 +1,27 @@
 class CommentsController < ApplicationController
+  before_action :set_article_with_article_id, only: :create
+
   def create
-    @comment = Comment.new(comment_params.merge(user_id: current_user.id,article_id: params[:article_id]))
-
-    if @comment.save
-      redirect_to article_path(@comment.article.id), notice: "コメントを投稿したうっほ！"
+    comment = @article.comments.new(comment_params.merge(user_id: current_user.id))
+    
+    if comment.save
+      flash[:notice] = 'コメントを投稿したうほっほ'
     else
-      redirect_back(fallback_location: root_path)
+      flash[:notice] = 'コメントの投稿に失敗したか空欄です'
     end
-  end
-
-  def edit
+    
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
     comment = Comment.find(params[:id])
     
     if comment.user_id = current_user.id
-      comment.destroy!
+      comment.destroy
       redirect_back(fallback_location: root_path)
     end
   end
+
   private
 
   def comment_params

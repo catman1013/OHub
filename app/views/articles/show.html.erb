@@ -6,6 +6,7 @@
   <%= link_to '削除', @article, method: :delete %>
 <% end %>
 
+
 <div class="comment-container">
   <h4>コメント</h4>
   <%= render 'layouts/comment_list', { comments: @comments, article: @article } %>
@@ -22,44 +23,29 @@
   <% end %>
 </div>
 
-<% (0..2).each do |n| %>
-  <% if @article.stamped_by?(current_user, Stamp.types.to_a[n][0]) %>
-    <%= button_to Stamp.types.to_a[n][0]+"スタンプ消去", article_stamps_path(@article, type: Stamp.types.to_a[n][0]), method: :delete %>
-  <% else %>
-    <%= button_to Stamp.types.to_a[n][0], article_stamps_path(@article, type: Stamp.types.to_a[n][0]) %>
-  <% end %>
-    <%= @stamps_count[n] %>
-<% end %>
-
-<%
-=begin%>
-  リファクタリングしない場合
-  ボタンではなくリンク
-<%
-=end%>
 <% if @article.stamped_by?(current_user, '面白い') %>
   <%= link_to '面白いスタンプ消去', article_stamps_path(@article, type: '面白い'), method: :delete %>
 <% else %>
   <%= link_to '面白い', article_stamps_path(@article, type: '面白い'), method: :post %>
 <% end %>
-<%= @stamps_count[0] %>
+<%= @stamps_count[:面白い] %>
 
 <% if @article.stamped_by?(current_user, '目から鱗') %>
   <%= link_to '目から鱗スタンプ消去', article_stamps_path(@article, type: '目から鱗'), method: :delete %>
 <% else %>
   <%= link_to '目から鱗', article_stamps_path(@article, type: '目から鱗'), method: :post %>
 <% end %>
-<%= @stamps_count[1] %>
+<%= @stamps_count[:目から鱗] %>
 
 <% if @article.stamped_by?(current_user, 'ゴリラ') %>
   <%= link_to 'ゴリラスタンプ消去', article_stamps_path(@article, type: 'ゴリラ'), method: :delete %>
 <% else %>
   <%= link_to 'ゴリラ', article_stamps_path(@article, type: 'ゴリラ'), method: :post %>
 <% end %>
-<%= @stamps_count[2] %>
+<%= @stamps_count[:ゴリラ] %>
 
 <% if @article.bookmarked_by?(current_user) %>
-  <%= link_to "ブックマーク外しちゃう", article_bookmarks_path(@article), method: :delete %>
+  <%= link_to 'ブックマーク外しちゃう', article_bookmarks_path(@article), method: :delete %>
 <% else %>
-  <%= link_to "ブックマークしちゃう", article_bookmarks_path(@article), method: :post %>
+  <%= link_to 'ブックマークしちゃう', article_bookmarks_path(@article), method: :post %>
 <% end %>

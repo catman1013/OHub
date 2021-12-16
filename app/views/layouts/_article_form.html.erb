@@ -1,19 +1,19 @@
 <%= form_with model: @article,　local: true do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
 
-  <div class="form-group">
+  <div class='form-group'>
     <%= f.label :title%>
     <%= f.text_field :title %>
   </div>
-  <div class="form-group">
-    <%= f.label :content, "本文" %>
+  <div class='form-group'>
+    <%= f.label :content, '本文' %>
     <%= f.text_area :content %>
   </div>
-  <div class="radio-group">
+  <div class='radio-group'>
     <%= f.label :category %>
     <%= f.collection_radio_buttons :category, Article.categories, :first, :first %>
   </div>
-  <div class="radio-group">
+  <div class='radio-group'>
     <%= f.label :tech_category %>
     <%= f.collection_radio_buttons :tech_category, Article.tech_categories, :first, :first %>
   </div>

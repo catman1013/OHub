@@ -15,10 +15,10 @@ class User < ApplicationRecord
   validates :something_to_say, length: { maximum:80 }
   validates :achievement, length: { maximum:100 }
   
-  enum favorite_event: [ :スプリント, :ミドル , :ロング, :リレー ]
+  enum favorite_event: { スプリント: 0, ミドル: 1, ロング: 2, リレー: 3 }
   
-  has_many :articles, dependent: :destroy
+  has_many :articles
   has_many :comments, dependent: :destroy
-  has_many :stamps, dependent: :destroy
+  has_many :stamps
   has_many :bookmarks, dependent: :destroy
 end
