@@ -1,7 +1,7 @@
 <p><%= @article.title %></p>
 <p><%= @article.content %></p>
 
-<% if author_or_not?(@article) %>
+<% if current_user && current_user.author_or_not?(@article) %>
   <%= link_to '編集', edit_article_path %>
   <%= link_to '削除', @article, method: :delete %>
 <% end %>
@@ -23,29 +23,31 @@
   <% end %>
 </div>
 
-<% if @article.stamped_by?(current_user, '面白い') %>
-  <%= link_to '面白いスタンプ消去', article_stamps_path(@article, type: '面白い'), method: :delete %>
-<% else %>
-  <%= link_to '面白い', article_stamps_path(@article, type: '面白い'), method: :post %>
-<% end %>
-<%= @stamps_count[:面白い] %>
+<% if current_user %>
+  <% if @article.stamped_by?(current_user, '面白い') %>
+    <%= link_to '面白いスタンプ消去', article_stamps_path(@article, type: '面白い'), method: :delete %>
+  <% else %>
+    <%= link_to '面白い', article_stamps_path(@article, type: '面白い'), method: :post %>
+  <% end %>
+  <%= @stamps_count[:面白い] %>
 
-<% if @article.stamped_by?(current_user, '目から鱗') %>
-  <%= link_to '目から鱗スタンプ消去', article_stamps_path(@article, type: '目から鱗'), method: :delete %>
-<% else %>
-  <%= link_to '目から鱗', article_stamps_path(@article, type: '目から鱗'), method: :post %>
-<% end %>
-<%= @stamps_count[:目から鱗] %>
+  <% if @article.stamped_by?(current_user, '目から鱗') %>
+    <%= link_to '目から鱗スタンプ消去', article_stamps_path(@article, type: '目から鱗'), method: :delete %>
+  <% else %>
+    <%= link_to '目から鱗', article_stamps_path(@article, type: '目から鱗'), method: :post %>
+  <% end %>
+  <%= @stamps_count[:目から鱗] %>
 
-<% if @article.stamped_by?(current_user, 'ゴリラ') %>
-  <%= link_to 'ゴリラスタンプ消去', article_stamps_path(@article, type: 'ゴリラ'), method: :delete %>
-<% else %>
-  <%= link_to 'ゴリラ', article_stamps_path(@article, type: 'ゴリラ'), method: :post %>
-<% end %>
-<%= @stamps_count[:ゴリラ] %>
+  <% if @article.stamped_by?(current_user, 'ゴリラ') %>
+    <%= link_to 'ゴリラスタンプ消去', article_stamps_path(@article, type: 'ゴリラ'), method: :delete %>
+  <% else %>
+    <%= link_to 'ゴリラ', article_stamps_path(@article, type: 'ゴリラ'), method: :post %>
+  <% end %>
+  <%= @stamps_count[:ゴリラ] %>
 
-<% if @article.bookmarked_by?(current_user) %>
-  <%= link_to 'ブックマーク外しちゃう', article_bookmarks_path(@article), method: :delete %>
-<% else %>
-  <%= link_to 'ブックマークしちゃう', article_bookmarks_path(@article), method: :post %>
+  <% if @article.bookmarked_by?(current_user) %>
+    <%= link_to 'ブックマーク外しちゃう', article_bookmarks_path(@article), method: :delete %>
+  <% else %>
+    <%= link_to 'ブックマークしちゃう', article_bookmarks_path(@article), method: :post %>
+  <% end %>
 <% end %>

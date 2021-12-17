@@ -24,6 +24,10 @@ class StampsController < ApplicationController
   end
 
   private
+
+  def set_article_with_article_id
+    @article = Article.find(params[:article_id])
+  end
   
   def stamp_params
     params.permit(:type)

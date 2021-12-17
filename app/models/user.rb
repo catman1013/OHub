@@ -21,4 +21,12 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :stamps
   has_many :bookmarks, dependent: :destroy
+
+  def author_or_not?(article)
+    article.user_id == id
+  end
+
+  def commenter_or_not?(comment)
+    comment.user_id == id
+  end
 end

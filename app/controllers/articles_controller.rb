@@ -19,9 +19,8 @@ class ArticlesController < ApplicationController
   def create
     article = Article.new(article_params.merge(user_id: current_user.id))
 
-    if @article.save
+    if article.save
       redirect_to user_mypages_path(current_user), notice: "記事を投稿したうほ"
-
     else
       render :new
     end

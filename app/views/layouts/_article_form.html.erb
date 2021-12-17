@@ -17,7 +17,7 @@
     <%= f.label :tech_category %>
     <%= f.collection_radio_buttons :tech_category, Article.tech_categories, :first, :first %>
   </div>
-  <div class="selectbox_group">
+  <div class='selectbox_group'>
     <%= f.label :status %>
     <%= f.collection_select :status, Article.statuses, :first, :first %>
   </div>
