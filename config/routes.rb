@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     resource :bookmarks, only: [:create, :destroy]
   end
 
+  get '/article/search', to: 'articles#search'
+
   root to: "users#new"
 end
