@@ -4,7 +4,7 @@ class Article < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
 
-  enum category: { mind: 0, technic: 1, physical: 2 }
+  enum category: { mind: 0, technic: 1, physical: 2, strategy: 3, theory: 4 }
   enum tech_category: { contaring: 0, go_straight: 1, take_a_direction: 2 }
   enum status: { draft: 0, published: 1}
 

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :show, :update]
   before_action :correct_user, only: [:edit, :update]
+  before_action :root_to_articles_path, only: [:new]
 
   def new
     @user = User.new
@@ -46,6 +47,12 @@ class UsersController < ApplicationController
   def correct_user
     unless current_user.id == @user.id
       redirect_to root_path, notice: 'はじいたうほ'
+    end
+  end
+
+  def root_to_articles_path
+    if current_user
+      redirect_to articles_path
     end
   end
 end
