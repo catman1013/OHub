@@ -11,11 +11,15 @@
   </div>
   <div class='radio-group'>
     <%= f.label :category %>
-    <%= f.collection_radio_buttons :category, Article.categories, :first, :last %>
+    <%= f.collection_radio_buttons :category, Article.categories, :first, :first %>
   </div>
   <div class='radio-group'>
     <%= f.label :tech_category %>
-    <%= f.collection_radio_buttons :tech_category, Article.categories, :first, :last %>
+    <%= f.collection_radio_buttons :tech_category, Article.tech_categories, :first, :first %>
+  </div>
+  <div class='selectbox_group'>
+    <%= f.label :status %>
+    <%= f.collection_select :status, Article.statuses, :first, :first %>
   </div>
   <%= f.submit '記事投稿' %>
 <% end %>

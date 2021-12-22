@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
     article = Article.new(article_params.merge(user_id: current_user.id))
 
     if article.save
-      redirect_to articles_path, notice: '記事を投稿したうほ'
+      redirect_to user_mypages_path(current_user), notice: "記事を投稿したうほ"
     else
       render :new
     end
@@ -31,16 +31,19 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to articles_url, notice: '記事を更新したっほ'
+
+      redirect_to user_mypages_path(current_user), notice: "記事を投稿したうほ"
     else
       render :edit
     end
   end
 
   def destroy
-    if author_or_not?(@article)
-      @article.destroy
-      redirect_to articles_path, notice: '記事を削除したっほ'
+    article = Article.find(params[:id])
+    
+    if article.user_id = current_user.id
+      article.destroy
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -57,7 +60,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :content, :category)
+    params.require(:article).permit(:title, :content, :category, :status)
   end
 
 end

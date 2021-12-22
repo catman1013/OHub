@@ -17,6 +17,7 @@ ja:
         updated_at: 更新日時
         category: カテゴリー
         tech_category: 技術カテゴリー
+        status: 公開状態
       user:
         first_name: 姓
         last_name: 名
@@ -54,6 +55,10 @@ ja:
         contaring: コンタリング
         go_straight: 直進
         take_a_direction: 正置
+      status:
+        draft: 下書き
+        published: 公開済み
+        
   errors:
     format: "%{attribute}%{message}"
     messages:

@@ -22,4 +22,10 @@ class BookmarksController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
+
+  private
+
+  def set_article_with_article_id
+    @article = Article.find(params[:article_id])
+  end
 end

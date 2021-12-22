@@ -24,6 +24,10 @@ class CommentsController < ApplicationController
 
   private
 
+  def set_article_with_article_id
+    @article = Article.find(params[:article_id])
+  end
+
   def comment_params
     params.require(:comment).permit(:content)
   end

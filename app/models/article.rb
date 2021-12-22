@@ -6,6 +6,7 @@ class Article < ApplicationRecord
 
   enum category: { mind: 0, technic: 1, physical: 2 }
   enum tech_category: { contaring: 0, go_straight: 1, take_a_direction: 2 }
+  enum status: { draft: 0, published: 1}
   
   belongs_to :user
   has_many :comments, dependent: :destroy
@@ -21,9 +22,9 @@ class Article < ApplicationRecord
   end
 
   def the_number_of_each_type_of_stamp
-    count = { 面白い: self.stamps.where(type: "面白い").count,
-      目から鱗: self.stamps.where(type: "目から鱗").count,
-      ゴリラ: self.stamps.where(type: "ゴリラ").count,
+    count = { 面白い: self.stamps.where(type: '面白い').count,
+      目から鱗: self.stamps.where(type: '目から鱗').count,
+      ゴリラ: self.stamps.where(type: 'ゴリラ').count,
     }
   end
 end
