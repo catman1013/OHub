@@ -68,5 +68,8 @@ gem 'kaminari'
 
 gem 'nokogiri', '~> 1.12.5'
 
+gem 'enum_help'
+
+
 
 
