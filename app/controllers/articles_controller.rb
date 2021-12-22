@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :prevent_direct_type_by_others, only: [:edit, :update, :destroy]
   
   def index
-    @articles = Article.all
+    @articles = Article.all.page(params[:page]).per(10)
   end
 
   def show
@@ -45,6 +45,11 @@ class ArticlesController < ApplicationController
       article.destroy
       redirect_back(fallback_location: root_path)
     end
+  end
+
+  def search
+    @articles = Article.all.where(category: params[:category]).page(params[:page]).per(5)
+    render :index
   end
 
   private

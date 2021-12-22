@@ -1,11 +1,5 @@
 ja:
   activerecord:
-    errors:
-      messages:
-        record_invalid: "バリデーションに失敗しました: %{errors}"
-        restrict_dependent_destroy:
-          has_one: "%{record}が存在しているので削除できません"
-          has_many: "%{record}が存在しているので削除できません"
     models:
       article: 記事
     attributes:
@@ -34,6 +28,19 @@ ja:
         favorite_event: 好きな種目
         something_to_say: 一言
         achievement: 主な実績
+    errors:
+        messages:
+          record_invalid: "バリデーションに失敗しました: %{errors}"
+          restrict_dependent_destroy:
+            has_one: "%{record}が存在しているので削除できません"
+            has_many: "%{record}が存在しているので削除できません"
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."
   helpers:
     submit:
       create: 登録するンゴ
@@ -51,6 +58,8 @@ ja:
         mind: 心
         technic: 技
         physical: 体
+        strategy: 戦略
+        theory: 考え方
       tech_category:
         contaring: コンタリング
         go_straight: 直進
