@@ -1,5 +1,5 @@
 class StampsController < ApplicationController
-  before_action :set_article_with_article_id
+  before_action :set_article
 
   def create
     stamp = @article.stamps.new(stamp_params.merge(user_id: current_user.id))
@@ -25,7 +25,7 @@ class StampsController < ApplicationController
 
   private
 
-  def set_article_with_article_id
+  def set_article
     @article = Article.find(params[:article_id])
   end
   

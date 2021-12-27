@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_article_with_article_id, only: :create
+  before_action :set_article, only: :create
 
   def create
     comment = @article.comments.new(comment_params.merge(user_id: current_user.id))
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
 
   private
 
-  def set_article_with_article_id
+  def set_article
     @article = Article.find(params[:article_id])
   end
 

@@ -1,5 +1,5 @@
 class BookmarksController < ApplicationController
-  before_action :set_article_with_article_id
+  before_action :set_article
 
   def create
     bookmark = @article.bookmarks.new(user_id: current_user.id)
@@ -25,7 +25,7 @@ class BookmarksController < ApplicationController
 
   private
 
-  def set_article_with_article_id
+  def set_article
     @article = Article.find(params[:article_id])
   end
 end
