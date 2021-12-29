@@ -29,4 +29,8 @@ class User < ApplicationRecord
   def commenter_or_not?(comment)
     comment.user_id == id
   end
+
+  def current_user_or_not?(user)
+    user.id = id
+  end
 end
