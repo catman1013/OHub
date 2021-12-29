@@ -31,7 +31,6 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-
       redirect_to user_mypages_path(current_user), notice: "記事を投稿したうほ"
     else
       render :edit

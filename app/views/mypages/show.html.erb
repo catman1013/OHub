@@ -36,7 +36,7 @@
         <td><%= link_to '削除', article, method: :delete %></td>
       <% end %>
 
-      <th><%= render 'layouts/comment_list', { comments: article.comments, article: article } %></th>
+      <th><%= render 'comment', { comments: article.comments, article: article } %></th>
     </tr>
   <% end %>
 </table>

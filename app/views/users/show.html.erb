@@ -1,4 +1,4 @@
-<% if current_user & current_user.id == @user.id %>
+<% if current_user&.current_user_or_not?(@user) %>
   <%= link_to 'アカウント設定', edit_user_path(session[:user_id]) %>
   <h1>マイプロフィール</h1>
 <% end %>
