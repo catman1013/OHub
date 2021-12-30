@@ -1,0 +1,21 @@
+<tr>
+  <td><%= article.title.truncate(20) %></td>
+  <% if current_user&.author_or_not?(article) %>
+    <td><%= article.user.first_name %></td>
+  <% else %>
+    <td><%= link_to article.user.first_name, user_path(article.user_id) %></td>
+  <% end %>
+  <td><%= article.content.truncate(30) %></td>
+  <td><%= article.category %></td>
+  <td><%= link_to '詳細', article %></td>
+  
+  <% if current_user&.author_or_not?(article) %>
+    <td><%= link_to '編集', edit_article_path(article) %></td>
+    <td><%= link_to '削除', article, method: :delete %></td>
+  <% end %>
+
+  <% @comments = article.comments%>
+
+  <td><%= render partial: '/articles/comment', collection: @comments, locals: { article: article }%></td>
+</tr>
+  

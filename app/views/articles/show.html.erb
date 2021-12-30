@@ -9,7 +9,7 @@
 
 <div class="comment-container">
   <h4>コメント</h4>
-  <%= render partial: 'comment', collection: @comments, locals: { article: @article }%>
+  <%= render partial: 'comment', collection: @comments, locals: { article: @article } %>
 
   <% if current_user %>
     <%= form_with model: [@article, @comment], local: true do |f| %>
