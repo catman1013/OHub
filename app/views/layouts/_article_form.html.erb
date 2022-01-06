@@ -9,11 +9,11 @@
     <%= f.label :content, '本文' %>
     <%= f.text_area :content %>
   </div>
-  <div class='radio-group'>
+  <div class='radio-group' id='category'>
     <%= f.label :category %>
     <%= f.collection_radio_buttons :category, Article.categories.keys.map {|k| [I18n.t("enums.article.category.#{k}"), k]}, :last, :first %>
   </div>
-  <div class='radio-group'>
+  <div class='radio-group' id='tech_category'>
     <%= f.label :tech_category %>
     <%= f.collection_radio_buttons :tech_category, Article.tech_categories.keys.map {|k| [I18n.t("enums.article.tech_category.#{k}"), k]}, :last, :first %>
   </div>
@@ -21,6 +21,6 @@
     <%= f.label :status %>
     <%= f.collection_select :status, Article.statuses.keys.map {|k| [I18n.t("enums.article.status.#{k}"), k]}, :last, :first %>
   </div>
-  <%= f.submit '記事投稿' %>
+  <%= f.submit %>
 <% end %>
 

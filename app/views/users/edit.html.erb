@@ -37,7 +37,7 @@
   </div>
   <div class='radio-group'>
     <%= f.label :favorite_event %>
-    <%= f.collection_radio_buttons :favorite_event, User.favorite_events, :first, :last %>
+    <%= f.collection_radio_buttons :favorite_event, User.favorite_events.keys.map {|k| [I18n.t("enums.user.favorite_event.#{k}"), k]}, :last, :first %>
   </div>
   <div class='form-group'>
     <%= f.label :achievement %>

@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :something_to_say, length: { maximum:80 }
   validates :achievement, length: { maximum:100 }
   
-  enum favorite_event: { スプリント: 0, ミドル: 1, ロング: 2, リレー: 3 }
+  enum favorite_event: { sprint: 0, middle: 1, long: 2, relay: 3 }
   
   has_many :articles
   has_many :comments, dependent: :destroy
@@ -31,6 +31,6 @@ class User < ApplicationRecord
   end
 
   def current_user_or_not?(user)
-    user.id = id
+    user.id == id
   end
 end
