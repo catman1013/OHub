@@ -3,7 +3,10 @@ class ArticlesController < ApplicationController
   before_action :prevent_direct_type_by_others, only: [:edit, :update, :destroy]
   
   def index
-    @articles = Article.where(status: 'published').page(params[:page]).per(10)
+    articles = Article.where(status: 'published')
+    articles = articles.where(category: params[:category]) if params[:category]
+    articles = articles.where(tech_category: params[:tech_category])if params[:tech_category]
+    @articles = articles.page(params[:page]).per(10)
   end
 
   def show
@@ -42,16 +45,6 @@ class ArticlesController < ApplicationController
       @article.destroy
       redirect_to user_mypages_path(current_user), notice: '記事を削除しました'
     end
-  end
-
-  def narrow_down_by_category
-    @articles = Article.where(status: 'published', category: params[:category]).page(params[:page]).per(5)
-    render :index
-  end
-
-  def narrow_down_by_techcategory
-    @articles = Article.where(status: 'published', tech_category: params[:tech_category]).page(params[:page]).per(5)
-    render :index
   end
 
   private

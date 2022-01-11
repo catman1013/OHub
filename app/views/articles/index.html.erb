@@ -6,30 +6,30 @@
       <%= button_to("全記事表示", articles_path, method: :get, class: "btn btn-outline-info", data: { disable_with: 'ナビゲーション中' }) %>
     </div>
     <div class='my-2 d-flex justify-content-end'>
-      <%= button_to(t('enums.article.category.mind')+"記事のみ表示", { controller: :articles, action: :narrow_down_by_category }, params: { category: 'mind' }, method: :get, class: "btn btn-outline-info", data: { disable_with: 'ナビゲーション中' }) %>
+      <%= button_to(t('enums.article.category.mind')+"記事のみ表示", { controller: :articles, action: :index }, params: { category: 'mind' }, method: :get, class: "btn btn-outline-info", data: { disable_with: 'ナビゲーション中' }) %>
     </div>
     <div class='my-2 d-flex justify-content-end'>
-      <%= button_to(t('enums.article.category.technic')+"記事のみ表示", { controller: :articles, action: :narrow_down_by_category }, params: { category: 'technic' }, method: :get, class: "btn btn-outline-info tech_btn", data: { disable_with: 'ナビゲーション中' }) %>
+      <%= button_to(t('enums.article.category.technic')+"記事のみ表示", { controller: :articles, action: :index }, params: { category: 'technic' }, method: :get, class: "btn btn-outline-info tech_btn", data: { disable_with: 'ナビゲーション中' }) %>
     </div>
     <div id='tech_category_btn_group'>
       <div class='my-2 d-flex justify-content-end'>
-        <%= button_to(t('enums.article.tech_category.contaring')+"記事のみ表示", { controller: :articles, action: :narrow_down_by_techcategory }, params: { tech_category: 'contaring' }, method: :get, class: "btn btn-outline-info btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
+        <%= button_to(t('enums.article.tech_category.contaring')+"記事のみ表示", { controller: :articles, action: :index }, params: { tech_category: 'contaring' }, method: :get, class: "btn btn-outline-info btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
       </div>
       <div class='my-2 d-flex justify-content-end'>
-        <%= button_to(t('enums.article.tech_category.go_straight')+"記事のみ表示", { controller: :articles, action: :narrow_down_by_techcategory }, params: { tech_category: 'go_straight' }, method: :get, class: "btn btn-outline-info btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
+        <%= button_to(t('enums.article.tech_category.go_straight')+"記事のみ表示", { controller: :articles, action: :index }, params: { tech_category: 'go_straight' }, method: :get, class: "btn btn-outline-info btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
       </div>
       <div class='my-2 d-flex justify-content-end'>
-        <%= button_to(t('enums.article.tech_category.take_a_direction')+"記事のみ表示", { controller: :articles, action: :narrow_down_by_techcategory }, params: { tech_category: 'take_a_direction' }, method: :get, class: "btn btn-outline-info btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
+        <%= button_to(t('enums.article.tech_category.take_a_direction')+"記事のみ表示", { controller: :articles, action: :index }, params: { tech_category: 'take_a_direction' }, method: :get, class: "btn btn-outline-info btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
       </div>
     </div>
     <div class='my-2 d-flex justify-content-end d-flex justify-content-end'>
-      <%= button_to(t('enums.article.category.physical')+"記事のみ表示", { controller: :articles, action: :narrow_down_by_category }, params: { category: 'physical' }, method: :get, class: "btn btn-outline-info", data: { disable_with: 'ナビゲーション中' }) %>
+      <%= button_to(t('enums.article.category.physical')+"記事のみ表示", { controller: :articles, action: :index }, params: { category: 'physical' }, method: :get, class: "btn btn-outline-info", data: { disable_with: 'ナビゲーション中' }) %>
     </div>
     <div class='my-2 d-flex justify-content-end'>
-      <%= button_to(t('enums.article.category.strategy')+"記事のみ表示", { controller: :articles, action: :narrow_down_by_category }, params: { category: 'strategy' }, method: :get, class: "btn btn-outline-info", data: { disable_with: 'ナビゲーション中' }) %>
+      <%= button_to(t('enums.article.category.strategy')+"記事のみ表示", { controller: :articles, action: :index }, params: { category: 'strategy' }, method: :get, class: "btn btn-outline-info", data: { disable_with: 'ナビゲーション中' }) %>
     </div>
     <div class='my-2 d-flex justify-content-end'>
-      <%= button_to(t('enums.article.category.theory')+"記事のみ表示", { controller: :articles, action: :narrow_down_by_category }, params: { category: 'theory' }, method: :get, class: "btn btn-outline-info", data: { disable_with: 'ナビゲーション中' }) %>
+      <%= button_to(t('enums.article.category.theory')+"記事のみ表示", { controller: :articles, action: :index }, params: { category: 'theory' }, method: :get, class: "btn btn-outline-info", data: { disable_with: 'ナビゲーション中' }) %>
     </div>
   </div>
 

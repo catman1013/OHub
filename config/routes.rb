@@ -11,8 +11,5 @@ Rails.application.routes.draw do
     resource :bookmarks, only: [:create, :destroy]
   end
 
-  get '/article/narrow_down_by_category', to: 'articles#narrow_down_by_category'
-  get '/article/narrow_down_by_techcategory', to: 'articles#narrow_down_by_techcategory'
-
   root to: "users#new"
 end
