@@ -70,6 +70,9 @@ gem 'nokogiri', '~> 1.12.5'
 
 gem 'enum_help'
 
+gem 'bootstrap'
+
+gem 'jquery-rails'
 
 
 

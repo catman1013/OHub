@@ -21,6 +21,6 @@
     <%= f.label :status %>
     <%= f.collection_select :status, Article.statuses.keys.map {|k| [I18n.t("enums.article.status.#{k}"), k]}, :last, :first %>
   </div>
-  <%= f.submit %>
+  <%= f.submit data: { disable_with: "保存しています..." }%>
 <% end %>
 
