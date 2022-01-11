@@ -26,7 +26,7 @@
       <% end %>
 
       <td><%= article.content.truncate(30) %></td>
-      <td><%= article.category %></td>
+      <td><%= article.category_i18n %></td>
       <td><%= link_to '詳細', article %></td>
       
       <% if current_user&.author_or_not?(article) %>

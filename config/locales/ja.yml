@@ -45,7 +45,7 @@ ja:
     submit:
       create: 登録するンゴ
       submit: 記事を投稿するうほ
-      update: 更新する
+      update: 更新するうほ
   enums:
     user:
       favorite_event:
