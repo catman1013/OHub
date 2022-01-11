@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :prevent_direct_type_by_others, only: [:edit, :update, :destroy]
   
   def index
-    @articles = Article.all.where(status: 'published').page(params[:page]).per(10)
+    @articles = Article.where(status: 'published').page(params[:page]).per(10)
   end
 
   def show
@@ -45,12 +45,12 @@ class ArticlesController < ApplicationController
   end
 
   def narrow_down_by_category
-    @articles = Article.all.where(status: 'published', category: params[:category]).page(params[:page]).per(5)
+    @articles = Article.where(status: 'published', category: params[:category]).page(params[:page]).per(5)
     render :index
   end
 
   def narrow_down_by_techcategory
-    @articles = Article.all.where(status: 'published', tech_category: params[:tech_category]).page(params[:page]).per(5)
+    @articles = Article.where(status: 'published', tech_category: params[:tech_category]).page(params[:page]).per(5)
     render :index
   end
 
