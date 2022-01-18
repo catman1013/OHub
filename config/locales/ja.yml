@@ -28,6 +28,8 @@ ja:
         favorite_event: 好きな種目
         something_to_say: 一言
         achievement: 主な実績
+      comment:
+        content: コメント
     errors:
         messages:
           record_invalid: "バリデーションに失敗しました: %{errors}"

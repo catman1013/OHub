@@ -6,7 +6,9 @@ class ArticlesController < ApplicationController
     articles = Article.where(status: 'published')
     articles = articles.where(category: params[:category]) if params[:category]
     articles = articles.where(tech_category: params[:tech_category])if params[:tech_category]
-    @articles = articles.page(params[:page]).per(10)
+    @articles = articles.page(params[:page]).per(12)
+    @category = params[:category] if params[:category]
+    @tech_category = params[:tech_category] if params[:tech_category]
   end
 
   def show
@@ -23,7 +25,7 @@ class ArticlesController < ApplicationController
     article = Article.new(article_params.merge(user_id: current_user.id))
 
     if article.save
-      redirect_to user_mypages_path(current_user), notice: "記事を投稿したうほ"
+      redirect_to user_path(current_user), notice: "記事を投稿したうほ"
     else
       render :new
     end
@@ -34,7 +36,7 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to user_mypages_path(current_user), notice: "記事を投稿したうほ"
+      redirect_to user_path(current_user), notice: "記事を更新したうほ"
     else
       render :edit
     end
@@ -43,7 +45,7 @@ class ArticlesController < ApplicationController
   def destroy
     if @article.user_id = current_user.id
       @article.destroy
-      redirect_to user_mypages_path(current_user), notice: '記事を削除しました'
+      redirect_to user_path(current_user), notice: '記事を削除しました'
     end
   end
 
