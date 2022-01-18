@@ -3,7 +3,12 @@ class ArticlesController < ApplicationController
   before_action :prevent_direct_type_by_others, only: [:edit, :update, :destroy]
   
   def index
-    @articles = Article.all.page(params[:page]).per(10)
+    articles = Article.where(status: 'published')
+    articles = articles.where(category: params[:category]) if params[:category]
+    articles = articles.where(tech_category: params[:tech_category])if params[:tech_category]
+    @articles = articles.page(params[:page]).per(12)
+    @category = params[:category] if params[:category]
+    @tech_category = params[:tech_category] if params[:tech_category]
   end
 
   def show
@@ -20,7 +25,7 @@ class ArticlesController < ApplicationController
     article = Article.new(article_params.merge(user_id: current_user.id))
 
     if article.save
-      redirect_to user_mypages_path(current_user), notice: "記事を投稿したうほ"
+      redirect_to user_path(current_user), notice: "記事を投稿したうほ"
     else
       render :new
     end
@@ -31,7 +36,7 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to user_mypages_path(current_user), notice: "記事を投稿したうほ"
+      redirect_to user_path(current_user), notice: "記事を更新したうほ"
     else
       render :edit
     end
@@ -40,13 +45,8 @@ class ArticlesController < ApplicationController
   def destroy
     if @article.user_id = current_user.id
       @article.destroy
-      redirect_back(fallback_location: root_path)
+      redirect_to user_path(current_user), notice: '記事を削除しました'
     end
-  end
-
-  def search
-    @articles = Article.all.where(category: params[:category]).page(params[:page]).per(5)
-    render :index
   end
 
   private
@@ -62,7 +62,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :content, :category, :status)
+    params.require(:article).permit(:title, :content, :category, :tech_category, :status)
   end
 
 end

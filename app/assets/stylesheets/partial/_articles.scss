@@ -1,0 +1,45 @@
+// Place all the styles related to the Articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.w-nav {
+  width: 200px;
+}
+
+.border-right {
+  border-right: 3px solid;
+}
+
+.border-red {
+  border-color: #ff8989;
+}
+.border-green {
+  border-color: #89ff97;
+}
+.border-blue {
+  border-color: #89b6ff;
+}
+
+.btn-no-border {
+  border:none;
+}
+
+.category-select {
+  // width: auto;
+}
+.textarea {
+  width: auto;
+  height:100px;
+}
+
+.bottom-70 {
+  bottom:70px;
+}
+.start-1100 {
+  left:1100px;
+}
+
+.back-black {
+  background-color:rgb(77, 75, 75);
+  color:white;
+}

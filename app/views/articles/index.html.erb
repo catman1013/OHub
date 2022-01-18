@@ -1,40 +1,64 @@
-<h1>技術記事たち</h1>
+<div class="container d-flex px-0">
+  <div class="container w-nav px-0">
+    <h3 class="mb-4 d-flex justify-content-end">技術記事</h3>
+    <div class='my-2 d-flex justify-content-end'>
+      <%= button_to("全表示", articles_path, method: :get, class: "btn btn-outline-dark btn-no-border", data: { disable_with: 'ナビゲーション中' }) %>
+    </div>
+    <div class='my-2 d-flex justify-content-end border-right border-red'>
+      <%= button_to(t('enums.article.category.mind')+"", { controller: :articles, action: :index }, params: { category: 'mind' }, method: :get, class: "btn btn-outline-dark btn-no-border border-warning", data: { disable_with: 'ナビゲーション中' }) %>
+    </div>
+    <div class='my-2 d-flex justify-content-end border-right border-green'>
+      <%= button_to(t('enums.article.category.technic')+"", { controller: :articles, action: :index }, params: { category: 'technic' }, method: :get, class: "btn btn-outline-dark btn-no-border tech_btn border-success", data: { disable_with: 'ナビゲーション中' }) %>
+    </div>
+    <div id='tech_category_btn_group'>
+      <div class='my-2 d-flex justify-content-end'>
+        <%= button_to(t('enums.article.tech_category.contaring')+"", { controller: :articles, action: :index }, params: { tech_category: 'contaring' }, method: :get, class: "btn btn-outline-dark btn-no-border btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
+      </div>
+      <div class='my-2 d-flex justify-content-end'>
+        <%= button_to(t('enums.article.tech_category.go_straight')+"", { controller: :articles, action: :index }, params: { tech_category: 'go_straight' }, method: :get, class: "btn btn-outline-dark btn-no-border btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
+      </div>
+      <div class='my-2 d-flex justify-content-end'>
+        <%= button_to(t('enums.article.tech_category.take_a_direction')+"", { controller: :articles, action: :index }, params: { tech_category: 'take_a_direction' }, method: :get, class: "btn btn-outline-dark btn-no-border btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
+      </div>
+    </div>
+    <div class='my-2 d-flex justify-content-end d-flex justify-content-end border-right border-blue'>
+      <%= button_to(t('enums.article.category.physical')+"", { controller: :articles, action: :index }, params: { category: 'physical' }, method: :get, class: "btn btn-outline-dark btn-no-border border-primary", data: { disable_with: 'ナビゲーション中' }) %>
+    </div>
+    <div class='my-2 d-flex justify-content-end'>
+      <%= button_to(t('enums.article.category.strategy')+"", { controller: :articles, action: :index }, params: { category: 'strategy' }, method: :get, class: "btn btn-outline-dark btn-no-border", data: { disable_with: 'ナビゲーション中' }) %>
+    </div>
+    <div class='my-2 d-flex justify-content-end'>
+      <%= button_to(t('enums.article.category.theory')+"", { controller: :articles, action: :index }, params: { category: 'theory' }, method: :get, class: "btn btn-outline-dark btn-no-border", data: { disable_with: 'ナビゲーション中' }) %>
+    </div>
+  </div>
 
-<%= button_to "全記事表示", articles_path, method: :get %>
-<%= button_to t('enums.article.category.mind')+"記事のみ表示", { controller: :articles, action: :search }, params: { category: 'mind' }, method: :get %>
-<%= button_to t('enums.article.category.technic')+"記事のみ表示", { controller: :articles, action: :search }, params: { category: 'technic' }, method: :get %>
-<%= button_to t('enums.article.category.physical')+"記事のみ表示", { controller: :articles, action: :search }, params: { category: 'physical' }, method: :get %>
-<%= button_to t('enums.article.category.strategy')+"記事のみ表示", { controller: :articles, action: :search }, params: { category: 'strategy' }, method: :get %>
-<%= button_to t('enums.article.category.theory')+"記事のみ表示", { controller: :articles, action: :search }, params: { category: 'theory' }, method: :get %>
-
-<table>
-  <tr>
-    <th><%= t('article.title') %> </th>
-    <th><%= t('user.first_name') %></th>
-    <th><%= t('article.content') %></th>
-    <th><%= t('article.category') %></th>
-  </tr>
-
-  <% @articles.each do |article|%>
-    <tr>
-      <td><%= article.title.truncate(20) %></td>
-
-      <% if current_user&.author_or_not?(article) %>
-        <td><%= article.user.first_name %></td>
-      <% else %>
-        <td><%= link_to article.user.first_name, user_path(article.user_id) %></td>
+  <div class="container mx-4">
+    <div class="container d-flex">
+      <div>
+        <p class="pan" id="pan"><%= @category %></p>
+      </div>
+      <div class="ms-4">
+        <span><%= paginate @articles %></span>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap">
+      <% @articles.each do |article|%>
+        <div class="container mx-2 my-2 py-3 px-4 shadow article-box border-right">
+          <p><%= "#{article.created_at.year}/#{article.created_at.month}/#{article.created_at.day}"%></p>
+          <h5><%= article.title.truncate(20) %></h5>
+          <p><%= article.content.truncate(42) %></p>
+          <p>
+            <% if current_user&.author_or_not?(article) %>
+              <%= article.user.first_name %>
+            <% else %>
+              <%= link_to article.user.first_name, user_path(article.user_id), class: "text-dark text-decoration-none" %>
+            <% end %>
+          </p>
+          <p class="categorypara"><%= article.category_i18n %></p>
+          <%= link_to '詳細', article %>
+        </div>
       <% end %>
-
-      <td><%= article.content.truncate(30) %></td>
-      <td><%= article.category_i18n %></td>
-      <td><%= link_to '詳細', article %></td>
-      
-      <% if current_user&.author_or_not?(article) %>
-        <td><%= link_to '編集', edit_article_path(article) %></td>
-        <td><%= link_to '削除', article, method: :delete %></td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
-
- <%= paginate @articles %>
+    </div>
+    <%= paginate @articles %>
+  </div>
+</div>

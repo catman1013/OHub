@@ -1,53 +1,64 @@
-<p><%= @article.title %></p>
-<p><%= @article.content %></p>
-
-<% if current_user&.author_or_not?(@article) %>
-  <%= link_to '編集', edit_article_path %>
-  <%= link_to '削除', article_path(@article), method: :delete %>
-<% end %>
-
-
-<div class="comment-container">
-  <h4>コメント</h4>
-  <%= render partial: 'comment', collection: @comments, locals: { article: @article } %>
-
-  <% if current_user %>
-    <%= form_with model: [@article, @comment], local: true do |f| %>
-      <%= render 'layouts/error_messages', model: f.object %>
-      <div class="form-group">
-        <%= f.label :content %>
-        <%= f.text_area :content %>
+<div class="container d-flex">
+  <div class="container" style="width: 70%">
+    <p class="h4 mb-4"><%= @article.title %></p>
+    <p><%= @article.content %></p>
+  </div>
+  <div class="container mt-4" style="width: 30%">
+    <div class="container position-fixed" style="width: auto">
+      <%= render partial: 'comment', collection: @comments, locals: { article: @article } %>
+      <div class="container">
+        <% if current_user %>
+          <%= form_with model: [@article, @comment], local: true do |f| %>
+            <%= render 'layouts/error_messages', model: f.object %>
+            <div class="form-group mt-4">
+              <%= f.text_area :content %>
+            </div>
+            <div class="mt-2 pull-right" style="width: 100%;">
+              <%= f.submit 'コメント投稿', data: { disable_with: "保存しています..." }, class: "btn btn-outline-primary btn-sm mb-4", style:"width: auto;" %>
+            </div>
+          <% end %>
+          <div class="container d-flex px-0">
+            <div class="container my-2 px-0">
+              <% if @article.stamped_by?(current_user, '面白い') %>
+                <%= link_to image_tag("https://3.bp.blogspot.com/-0LzRcabLeS4/U0pTFP-ULvI/AAAAAAAAfDI/350gzN4bTN8/s400/text_warai.png", style: "width:25px;"), article_stamps_path(@article, type: '面白い'), method: :delete, class: "btn btn-success btn-sm" %>
+              <% else %>
+                <%= link_to image_tag("https://3.bp.blogspot.com/-0LzRcabLeS4/U0pTFP-ULvI/AAAAAAAAfDI/350gzN4bTN8/s400/text_warai.png", style: "width:25px;"), article_stamps_path(@article, type: '面白い'), method: :post, class: "btn btn-outline-success btn-sm" %>
+              <% end %>
+              <span class="ms-2"><%= @stamps_count[:面白い] %></span>
+            </div>
+            <div class="container my-2 px-0">
+              <% if @article.stamped_by?(current_user, '目から鱗') %>
+                <%= link_to image_tag("https://1.bp.blogspot.com/-v5xej9JBjFo/Xbo7NR9MRPI/AAAAAAABVz8/HFpWUtiHzIwYGhxHzS3IzXtYDjNUnOMqACNcBGAsYHQ/s400/kotowaza_mekara_uroko_man.png", style: "width:25px;"), article_stamps_path(@article, type: '目から鱗'), method: :delete, class: "btn btn-success btn-sm" %>
+              <% else %>
+                <%= link_to image_tag("https://1.bp.blogspot.com/-v5xej9JBjFo/Xbo7NR9MRPI/AAAAAAABVz8/HFpWUtiHzIwYGhxHzS3IzXtYDjNUnOMqACNcBGAsYHQ/s400/kotowaza_mekara_uroko_man.png", style: "width:25px;"), article_stamps_path(@article, type: '目から鱗'), method: :post, class: "btn btn-outline-success btn-sm" %>
+              <% end %>
+              <span class="ms-2 "><%= @stamps_count[:目から鱗] %></span>
+            </div>
+            <div class="container my-2 px-0">
+              <% if @article.stamped_by?(current_user, 'ゴリラ') %>
+                <%= link_to image_tag("https://2.bp.blogspot.com/-ruMSXp-w-qk/XDXbUFVC3FI/AAAAAAABQ-8/QRyKKr--u9E1-Rvy2SQqt0QPWeq1ME6wgCLcBGAs/s400/animal_gorilla.png", style: "width:25px;"), article_stamps_path(@article, type: 'ゴリラ'), method: :delete, class: "btn btn-success btn-sm" %>
+              <% else %>
+                <%= link_to image_tag("https://2.bp.blogspot.com/-ruMSXp-w-qk/XDXbUFVC3FI/AAAAAAABQ-8/QRyKKr--u9E1-Rvy2SQqt0QPWeq1ME6wgCLcBGAs/s400/animal_gorilla.png", style: "width:25px;"), article_stamps_path(@article, type: 'ゴリラ'), method: :post, class: "btn btn-outline-success btn-sm" %>
+              <% end %>
+              <span class="ms-2"><%= @stamps_count[:ゴリラ] %></span>
+            </div>
+          </div>
+          <div class="container my-2 px-0">
+            <% if @article.bookmarked_by?(current_user) %>
+              <%= link_to image_tag("https://1.bp.blogspot.com/-p_wQYdgwfxo/XUjdtFC4xYI/AAAAAAABT_A/FIc5vPwclkEeKdy98I9AXm309qtfJBrLwCLcBGAs/s400/book_hon_no_mushi_man_bug.png", style: "width:35px;"), article_bookmarks_path(@article), method: :delete, class: "btn btn-outline-success btn-sm" %>
+            <% else %>
+              <%= link_to image_tag("https://1.bp.blogspot.com/-p_wQYdgwfxo/XUjdtFC4xYI/AAAAAAABT_A/FIc5vPwclkEeKdy98I9AXm309qtfJBrLwCLcBGAs/s400/book_hon_no_mushi_man_bug.png", style: "width:35px;"), article_bookmarks_path(@article), method: :post, class: "btn btn-outline-success btn-sm" %>
+            <% end %>
+            <span class="ms-2">ブックマークの虫</span>
+          </div>
+        <% end %>
       </div>
-      <%= f.submit 'コメント投稿' %>
-    <% end %>
-  <% end %>
+      <div class="container position-absolute position-fixed bottom-70 start-900">
+        <% if current_user&.author_or_not?(@article) %>
+          <%= link_to '記事を編集', edit_article_path, class: "btn btn-outline-dark me-2"%>
+          <%= link_to '記事を削除', article_path(@article), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-outline-danger" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<% if current_user %>
-  <% if @article.stamped_by?(current_user, '面白い') %>
-    <%= link_to '面白いスタンプ消去', article_stamps_path(@article, type: '面白い'), method: :delete %>
-  <% else %>
-    <%= link_to '面白い', article_stamps_path(@article, type: '面白い'), method: :post %>
-  <% end %>
-  <%= @stamps_count[:面白い] %>
-
-  <% if @article.stamped_by?(current_user, '目から鱗') %>
-    <%= link_to '目から鱗スタンプ消去', article_stamps_path(@article, type: '目から鱗'), method: :delete %>
-  <% else %>
-    <%= link_to '目から鱗', article_stamps_path(@article, type: '目から鱗'), method: :post %>
-  <% end %>
-  <%= @stamps_count[:目から鱗] %>
-
-  <% if @article.stamped_by?(current_user, 'ゴリラ') %>
-    <%= link_to 'ゴリラスタンプ消去', article_stamps_path(@article, type: 'ゴリラ'), method: :delete %>
-  <% else %>
-    <%= link_to 'ゴリラ', article_stamps_path(@article, type: 'ゴリラ'), method: :post %>
-  <% end %>
-  <%= @stamps_count[:ゴリラ] %>
-
-  <% if @article.bookmarked_by?(current_user) %>
-    <%= link_to 'ブックマーク外しちゃう', article_bookmarks_path(@article), method: :delete %>
-  <% else %>
-    <%= link_to 'ブックマークしちゃう', article_bookmarks_path(@article), method: :post %>
-  <% end %>
-<% end %>
