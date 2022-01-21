@@ -43,7 +43,7 @@
     </div>
     <div class="d-flex flex-wrap">
       <% @articles.each do |article|%>
-        <div class="container mx-2 my-2 py-3 px-4 shadow article-box border-right">
+        <div class="container mx-2 my-2 py-3 px-4 shadow article-box border-right <%=article.foo_color %>">
           <p><%= "#{article.created_at.year}/#{article.created_at.month}/#{article.created_at.day}"%></p>
           <h5><%= article.title.truncate(20) %></h5>
           <p><%= article.content.truncate(42) %></p>

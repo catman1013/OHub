@@ -1,20 +1,32 @@
-<h1>ログイン画面</h1>
-
-<%= form_with scope: :session , local: true do |f| %>
-
-  <%= render 'layouts/error_messages', model: f.object %>
-  <div class='form-group'>
-    <%= f.label :first_name, '姓' %>
-    <%= f.text_field :first_name %>
+<div class="container width-100vw height-80vh back-image">
+  <div class="top-10 position-relative height-100">
+    <div class="container d-flex align-items-center height-50vh mx-auto width-50 my-auto border back-white">
+      <div class="container text-center">
+        <p class="h1 mb-0">O-TechHub</p>
+        <p>オーテックハブ</p>
+        <p>オリエンテーリング技術記事投稿サイト</p>
+      </div>
+      <div class="container">
+        <%= form_with scope: :session, local: true do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
+        <div class='form-group py-2 d-flex justify-content-end'>
+          <%= f.label :first_name, '姓', class: "me-2" %>
+          <%= f.text_field :first_name %>
+        </div>
+        <div class='form-group py-2 d-flex justify-content-end'>
+          <%= f.label :email, 'メールアドレス', class: "me-2" %>
+          <%= f.text_field :email %>
+        </div>
+        <div class='form-group py-2 d-flex justify-content-end'>
+          <%= f.label :password, 'パスワード', class: "me-2" %>
+          <%= f.text_field :password %>
+        </div>
+        <div class="form-group py-2 d-flex justify-content-end">
+          <%= link_to 'アカウント作成', new_user_path, class: "btn btn-outline-dark btn-sm mx-2" %>
+          <%= f.submit 'ログインする', class: "btn btn-dark my-4" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class='form-group'>
-    <%= f.label :email, 'メールアドレス' %>
-    <%= f.text_field :email %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :password, 'パスワード' %>
-    <%= f.text_field :password %>
-  </div>
-  <%= f.submit 'ログインする' %>
-<% end %>
-<%= link_to 'アカウント作成はこちら', new_user_path %>
+</div>

@@ -1,13 +1,13 @@
-<div class="container">
-  <div class="container my-4">
-    <% if current_user&.current_user_or_not?(@user) %>
-      <h5>マイプロフィール</h5>
-    <% else %>
-      <h1><%= @user.first_name %></h1>
-    <% end %>
-  </div>
-  <div class="container d-flex">
-    <div class="container mx-0" style="width:20%">
+<div class="container d-flex">
+  <div class="container width-20">
+    <div class="container py-2">
+      <% if current_user&.current_user_or_not?(@user) %>
+        <h5>マイプロフィール</h5>
+      <% else %>
+        <h1><%= @user.first_name %></h1>
+      <% end %>
+    </div>
+    <div class="container">
       <img src="https://1.bp.blogspot.com/-7d0Ty0HTICI/V4SA6emmiwI/AAAAAAAA8N4/JNfzdM6_MdcXmQm3TOv8paAJLjLPP-NoQCLcB/s800/character_gorilla_hardboiled.png" class="mx-1 border border-dark" style="width: 100%">
       <div class="container text-end my-4">
         <p><%= @user.first_name %></p>
@@ -21,35 +21,36 @@
         <p><%= @user.something_to_say %></p>
       </div>
     </div>
-    <div class="container">
-      <div class="container d-flex mb-2">
-        <div class="ms-2"><%= button_to "全ての記事を表示", user_path(current_user), method: :get, class: 'btn btn-outline-warning' %></div>
-        <div class="ms-2"><%= button_to t('enums.article.status.published')+"記事のみ表示", { controller: :users, action: :show }, params: { status: 'published' }, method: :get, class: 'btn btn-outline-warning' %></div>
-        <div class="ms-2"><%= button_to t('enums.article.status.draft')+"記事のみ表示", { controller: :users, action: :show }, params: { status: 'draft' }, method: :get, class: 'btn btn-outline-warning' %></div>
+  </div>
+  <div class="container py-2">
+    <div class="container d-flex mb-2">
+      <div class="ms-2"><%= button_to "全ての記事を表示", user_path(current_user), method: :get, class: 'btn btn-outline-dark' %></div>
+      <div class="ms-2"><%= button_to t('enums.article.status.published')+"記事のみ表示", { controller: :users, action: :show }, params: { status: 'published' }, method: :get, class: 'btn btn-outline-dark' %></div>
+      <div class="ms-2"><%= button_to t('enums.article.status.draft')+"記事のみ表示", { controller: :users, action: :show }, params: { status: 'draft' }, method: :get, class: 'btn btn-outline-dark' %></div>
+    </div>
+    <div class="d-flex flex-wrap my-4">
+      <% @articles.each do |article|%>
+        <div class="container mx-2 my-2 py-3 px-4 shadow article-box border-right  <%=article.foo_color %>">
+          <p><%= "#{article.created_at.year}/#{article.created_at.month}/#{article.created_at.day}"%></p>
+          <h5><%= article.title.truncate(20) %></h5>
+          <p><%= article.content.truncate(42) %></p>
+          <p class="categorypara"><%= article.category_i18n %></p>
+          <%= link_to '詳細', article %>
+          <% if current_user&.author_or_not?(article) %>
+            <%= link_to '編集', edit_article_path(article) %>
+            <%= link_to '削除', article_path(article), remote: :true, method: :delete, data: { confirm: '削除しますか？' } %>
+          <% end %>
         </div>
-      <div class="d-flex flex-wrap my-4">
-        <% @articles.each do |article|%>
-          <div class="container mx-2 my-2 py-3 px-4 shadow article-box border-right">
-            <p><%= "#{article.created_at.year}/#{article.created_at.month}/#{article.created_at.day}"%></p>
-            <h5><%= article.title.truncate(20) %></h5>
-            <p><%= article.content.truncate(42) %></p>
-            <p class="categorypara"><%= article.category_i18n %></p>
-            <%= link_to '詳細', article %>
-            <% if current_user&.author_or_not?(article) %>
-              <%= link_to '編集', edit_article_path(article) %>
-              <%= link_to '削除', article_path(article), remote: :true, method: :delete, data: { confirm: '削除しますか？' } %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <div>
-        <%= paginate @articles %>
-      </div>
-      <div class="d-flex justify-content-end mb-4 me-4">
+      <% end %>
+    </div>
+    <div>
+      <%= paginate @articles %>
+    </div>
+    <div class="d-flex justify-content-end">
       <% if current_user&.current_user_or_not?(@user) %>
         <%= link_to 'アカウント設定', edit_user_path(session[:user_id]), class: "btn btn-outline-dark" %>
       <% end %>
-      </div>
     </div>
+
   </div>
 </div>

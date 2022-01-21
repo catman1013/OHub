@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
     articles = Article.where(status: 'published')
     articles = articles.where(category: params[:category]) if params[:category]
     articles = articles.where(tech_category: params[:tech_category])if params[:tech_category]
-    @articles = articles.page(params[:page]).per(12)
+    @articles = articles.order(created_at: "DESC").page(params[:page]).per(12)
     @category = params[:category] if params[:category]
     @tech_category = params[:tech_category] if params[:tech_category]
   end

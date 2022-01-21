@@ -8,7 +8,7 @@
     <% end %>
     <%= comment.created_at.year %>/<%= comment.created_at.month %>/<%= comment.created_at.day %>
     <% if current_user&.commenter_or_not?(comment) %>
-      <%= link_to '削除', article_comment_path(article, comment), method: :delete,class: "btn btn-outline-primary btn-no-border btn-sm"%>
+      <%= link_to '削除', article_comment_path(article, comment), method: :delete, class: "btn btn-outline-primary btn-no-border btn-sm"%>
     <% end %>
     </div>
 </div>

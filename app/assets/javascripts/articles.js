@@ -9,19 +9,19 @@ window.onload = function() {
     });
   });
 
-  const categoryNodeList = document.getElementsByClassName('categorypara');
-  for (var i=0; i < categoryNodeList.length; ++i) {
-    if(categoryNodeList[i].textContent == '心'){
-      console.log('心');
-      categoryNodeList[i].parentNode.classList.add('border-red');
-    }else if(categoryNodeList[i].textContent == '技'){
-      console.log('技');
-      categoryNodeList[i].parentNode.classList.add('border-green');
-    }else if(categoryNodeList[i].textContent == '体'){
-      console.log('体');
-      categoryNodeList[i].parentNode.classList.add('border-blue');
-    }
-  }
+  // const categoryNodeList = document.getElementsByClassName('categorypara');
+  // for (var i=0; i < categoryNodeList.length; ++i) {
+  //   if(categoryNodeList[i].textContent == '心'){
+  //     console.log('心');
+  //     categoryNodeList[i].parentNode.classList.add('border-red');
+  //   }else if(categoryNodeList[i].textContent == '技'){
+  //     console.log('技');
+  //     categoryNodeList[i].parentNode.classList.add('border-green');
+  //   }else if(categoryNodeList[i].textContent == '体'){
+  //     console.log('体');
+  //     categoryNodeList[i].parentNode.classList.add('border-blue');
+  //   }
+  // }
 
   const radiobtngroup = document.getElementById('category');
   const radiobtnmind = document.getElementById('article_category_mind');

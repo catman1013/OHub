@@ -28,4 +28,14 @@ class Article < ApplicationRecord
       ゴリラ: self.stamps.where(type: 'ゴリラ').count,
     }
   end
+
+  def foo_color
+    if self.category == 'mind'
+      "border-red"
+    elsif self.category == 'technic'
+      "border-green"
+    elsif self.category == 'physical'
+      "border-blue"
+    end
+  end
 end

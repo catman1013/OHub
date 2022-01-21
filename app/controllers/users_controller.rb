@@ -22,11 +22,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @articles = @user.articles.where(status:'published').page(params[:page]).per(6)
+    @articles = @user.articles.where(status:'published').order(created_at: "DESC").page(params[:page]).per(6)
     if params[:status]
-      @articles = Article.where(user_id: @user, status: params[:status]).page(params[:page]).per(6)
+      @articles = Article.where(user_id: @user, status: params[:status]).order(created_at: "DESC").page(params[:page]).per(6)
     else
-      @articles = Article.where(user_id: @user).page(params[:page]).per(6)
+      @articles = Article.where(user_id: @user).order(created_at: "DESC").page(params[:page]).per(6)
     end
   end
 
