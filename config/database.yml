@@ -80,6 +80,9 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: OHub_production
   username: OHub
   password: <%= ENV['OHUB_DATABASE_PASSWORD'] %>
