@@ -1,55 +1,57 @@
-<div class="container">
-
+<div class="edit-user-container container my-4">
   <%= form_with model: @user, local: true do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
-    <div class="container my-4">
-      <div class='form-group my-2'>
-        <%= f.label :first_name %>
-        <%= f.text_field :first_name %>
-      </div>
-      <div class='form-group my-2'>
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name %>
-      </div>
-      <div class='form-group my-2'>
-        <%= f.label :email %>
-        <%= f.text_field :email %>
-      </div>
-      <div class='form-group my-2'>
-        <%= f.label :orien_started_at %>
-        <%= f.date_select :orien_started_at, start_year: 1960, end_year: Time.now.year, discard_month: true, discard_day:true, include_blank: '選択して下さい' %>
-      </div>
-      <div class='form-group my-2'>
-        <%= f.label :affilication %>
-        <%= f.text_field :affilication %>
-      </div>
-      <div class='form-group my-2'>
-        <%= f.label :university %>
-        <%= f.text_field :university %>大学
-      </div>
-      <div class='form-group my-2'>
-        <%= f.label :entered_university_at %>
-        <%= f.date_select :entered_university_at, start_year: 1960, end_year: Time.now.year, discard_month: true, discard_day:true, include_blank: '選択して下さい' %>
-      </div>
-      <div class='form-group my-2'>
-        <%= f.label :favorite_terrain %>
-        <%= f.text_field :favorite_terrain %>
-      </div>
-      <div class='radio-group my-2'>
-        <%= f.label :favorite_event %>
-        <%= f.collection_radio_buttons :favorite_event, User.favorite_events.keys.map {|k| [I18n.t("enums.user.favorite_event.#{k}"), k]}, :last, :first %>
-      </div>
-      <div class='form-group my-2'>
-        <%= f.label :achievement %>
-        <%= f.text_field :achievement %>
-      </div>
-      <div class='form-group my-2'>
-        <%= f.label :something_to_say %>
-        <%= f.text_field :something_to_say %>
-      </div>
+    <table>
+      <tbody>
+        <tr>
+          <th class="form-label"><%= f.label :first_name %></th>
+          <td><%= f.text_field :first_name, placeholder: "姓" %></td>
+        </tr>
+        <tr>
+          <th class="form-label"><%= f.label :last_name %></th>
+          <td><%= f.text_field :last_name, placeholder: "名" %></td>
+        </tr>
+        <tr>
+          <th class="form-label"><%= f.label :email %></th>
+          <td><%= f.text_field :email, placeholder: "メールアドレス" %></td>
+        </tr>
+        <tr>
+          <th class="form-label"><%= f.label :orien_started_at %></th>
+          <td><%= f.date_select :orien_started_at, start_year: 1960, end_year: Time.now.year, discard_month: true, discard_day:true, include_blank: '選択して下さい' %></td>
+        </tr>
+        <tr>
+          <th class="form-label"><%= f.label :affilication %></th>
+          <td><%= f.text_field :affilication, placeholder: "所属" %></td>
+        </tr>
+        <tr>
+          <th class="form-label"><%= f.label :university %></th>
+          <td><%= f.text_field :university, placeholder: "出身大学" %></td>
+        </tr>
+        <tr>
+          <th class="form-label"><%= f.label :entered_university_at %></th>
+          <td><%= f.date_select :entered_university_at, start_year: 1960, end_year: Time.now.year, discard_month: true, discard_day:true, include_blank: '選択して下さい' %></td>
+        </tr>
+        <tr>
+          <th class="form-label"><%= f.label :favorite_terrain %></th>
+          <td><%= f.text_field :favorite_terrain, placeholder: "好きなテレイン" %></td>
+        </tr>
+        <tr>
+          <th class="form-label"><%= f.label :favorite_event %></th>
+          <td><%= f.collection_radio_buttons :favorite_event, User.favorite_events.keys.map {|k| [I18n.t("enums.user.favorite_event.#{k}"), k]}, :last, :first %></td>
+        </tr>
+        <tr>
+          <th class="form-label"><%= f.label :achievement %></th>
+          <td><%= f.text_field :achievement, placeholder: "実績" %></td>
+        </tr>
+        <tr>
+          <th class="form-label"><%= f.label :something_to_say %></th>
+          <td><%= f.text_field :something_to_say, placeholder: "何か一言" %></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="containerm mt-4">
+      <%= f.submit '更新する', data: { disable_with: "更新しています..." }, class: 'btn btn-light' %>
     </div>
-    <div class="container">
-      <%= f.submit '更新する', data: { disable_with: "更新しています..." }, class: 'btn btn-outline-dark' %>
-    </end>
   <% end %>
 </div>

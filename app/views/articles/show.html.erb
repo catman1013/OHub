@@ -1,64 +1,72 @@
-<div class="container d-flex">
-  <div class="container" style="width: 70%">
-    <p class="h4 mb-4"><%= @article.title %></p>
-    <p><%= @article.content %></p>
+<div class="container d-md-flex justify-content-center" id="show-container">
+  <div class="container back-white min-height max-w80 my-4 p-5 rounded-right">
+    <p class="h4 overflow-wrap mx-0"><%= @article.title %></p>
+    <p class="overflow-wrap my-4"><%= @article.content %></p>
   </div>
-  <div class="container mt-4" style="width: 30%">
-    <div class="container position-fixed" style="width: auto">
-      <%= render partial: 'comment', collection: @comments, locals: { article: @article } %>
-      <div class="container">
+  <div class="container back-white mt-4 py-4p px-2p rounded-right" id="comments">
+    <div class="container mx-0 mb-4 pt-2 border">
+      <div class="comment-wrapper container">
+        <p class="mb-0 mt-2 pb-1 fs-8 border-comment">コメント</p>
         <% if current_user %>
           <%= form_with model: [@article, @comment], local: true do |f| %>
             <%= render 'layouts/error_messages', model: f.object %>
             <div class="form-group mt-4">
-              <%= f.text_area :content %>
+              <%= f.text_area :content, class: "row-4 width-100", style: "resize: none;" %>
             </div>
-            <div class="mt-2 pull-right" style="width: 100%;">
-              <%= f.submit 'コメント投稿', data: { disable_with: "保存しています..." }, class: "btn btn-outline-primary btn-sm mb-4", style:"width: auto;" %>
+            <div class="d-flex comment-btn" style="width: 100%;">
+              <%= f.submit 'コメント投稿', data: { disable_with: "保存しています..." }, class: "btn btn-outline-secondary btn-sm mt-2 mb-4", style:"width: auto;" %>
             </div>
           <% end %>
-          <div class="container d-flex px-0">
-            <div class="container my-2 px-0">
-              <% if @article.stamped_by?(current_user, '面白い') %>
-                <%= link_to image_tag("https://3.bp.blogspot.com/-0LzRcabLeS4/U0pTFP-ULvI/AAAAAAAAfDI/350gzN4bTN8/s400/text_warai.png", style: "width:25px;"), article_stamps_path(@article, type: '面白い'), method: :delete, class: "btn btn-success btn-sm" %>
-              <% else %>
-                <%= link_to image_tag("https://3.bp.blogspot.com/-0LzRcabLeS4/U0pTFP-ULvI/AAAAAAAAfDI/350gzN4bTN8/s400/text_warai.png", style: "width:25px;"), article_stamps_path(@article, type: '面白い'), method: :post, class: "btn btn-outline-success btn-sm" %>
-              <% end %>
-              <span class="ms-2"><%= @stamps_count[:面白い] %></span>
-            </div>
-            <div class="container my-2 px-0">
-              <% if @article.stamped_by?(current_user, '目から鱗') %>
-                <%= link_to image_tag("https://1.bp.blogspot.com/-v5xej9JBjFo/Xbo7NR9MRPI/AAAAAAABVz8/HFpWUtiHzIwYGhxHzS3IzXtYDjNUnOMqACNcBGAsYHQ/s400/kotowaza_mekara_uroko_man.png", style: "width:25px;"), article_stamps_path(@article, type: '目から鱗'), method: :delete, class: "btn btn-success btn-sm" %>
-              <% else %>
-                <%= link_to image_tag("https://1.bp.blogspot.com/-v5xej9JBjFo/Xbo7NR9MRPI/AAAAAAABVz8/HFpWUtiHzIwYGhxHzS3IzXtYDjNUnOMqACNcBGAsYHQ/s400/kotowaza_mekara_uroko_man.png", style: "width:25px;"), article_stamps_path(@article, type: '目から鱗'), method: :post, class: "btn btn-outline-success btn-sm" %>
-              <% end %>
-              <span class="ms-2 "><%= @stamps_count[:目から鱗] %></span>
-            </div>
-            <div class="container my-2 px-0">
-              <% if @article.stamped_by?(current_user, 'ゴリラ') %>
-                <%= link_to image_tag("https://2.bp.blogspot.com/-ruMSXp-w-qk/XDXbUFVC3FI/AAAAAAABQ-8/QRyKKr--u9E1-Rvy2SQqt0QPWeq1ME6wgCLcBGAs/s400/animal_gorilla.png", style: "width:25px;"), article_stamps_path(@article, type: 'ゴリラ'), method: :delete, class: "btn btn-success btn-sm" %>
-              <% else %>
-                <%= link_to image_tag("https://2.bp.blogspot.com/-ruMSXp-w-qk/XDXbUFVC3FI/AAAAAAABQ-8/QRyKKr--u9E1-Rvy2SQqt0QPWeq1ME6wgCLcBGAs/s400/animal_gorilla.png", style: "width:25px;"), article_stamps_path(@article, type: 'ゴリラ'), method: :post, class: "btn btn-outline-success btn-sm" %>
-              <% end %>
-              <span class="ms-2"><%= @stamps_count[:ゴリラ] %></span>
-            </div>
+        <% end %>
+      </div>
+      <div class="comment">
+        <%= render partial: 'comment', collection: @comments, locals: { article: @article }, class: "comment" %>
+      </div> 
+    </div>   
+    <div class="container my-4">   
+      <% if current_user %>
+        <div class="container d-flex justify-content-center px-0 width-80">
+          <div class="container my-2 px-0">
+            <% if @article.stamped_by?(current_user, '面白い') %>
+              <%= link_to image_tag("https://3.bp.blogspot.com/-0LzRcabLeS4/U0pTFP-ULvI/AAAAAAAAfDI/350gzN4bTN8/s400/text_warai.png", style: "width:25px;"), article_stamps_path(@article, type: '面白い'), method: :delete, class: "btn btn-success btn-sm", data: { disable_with: '問い合わせ中...' } %>
+            <% else %>
+              <%= link_to image_tag("https://3.bp.blogspot.com/-0LzRcabLeS4/U0pTFP-ULvI/AAAAAAAAfDI/350gzN4bTN8/s400/text_warai.png", style: "width:25px;"), article_stamps_path(@article, type: '面白い'), method: :post, class: "btn btn-outline-success btn-sm", data: { disable_with: '問い合わせ中...' } %>
+            <% end %>
+            <span class="px-2p"><%= @stamps_count[:面白い] %></span>
           </div>
           <div class="container my-2 px-0">
-            <% if @article.bookmarked_by?(current_user) %>
-              <%= link_to image_tag("https://1.bp.blogspot.com/-p_wQYdgwfxo/XUjdtFC4xYI/AAAAAAABT_A/FIc5vPwclkEeKdy98I9AXm309qtfJBrLwCLcBGAs/s400/book_hon_no_mushi_man_bug.png", style: "width:35px;"), article_bookmarks_path(@article), method: :delete, class: "btn btn-outline-success btn-sm" %>
+            <% if @article.stamped_by?(current_user, '目から鱗') %>
+              <%= link_to image_tag("https://1.bp.blogspot.com/-v5xej9JBjFo/Xbo7NR9MRPI/AAAAAAABVz8/HFpWUtiHzIwYGhxHzS3IzXtYDjNUnOMqACNcBGAsYHQ/s400/kotowaza_mekara_uroko_man.png", style: "width:25px;"), article_stamps_path(@article, type: '目から鱗'), method: :delete, class: "btn btn-success btn-sm" %>
             <% else %>
-              <%= link_to image_tag("https://1.bp.blogspot.com/-p_wQYdgwfxo/XUjdtFC4xYI/AAAAAAABT_A/FIc5vPwclkEeKdy98I9AXm309qtfJBrLwCLcBGAs/s400/book_hon_no_mushi_man_bug.png", style: "width:35px;"), article_bookmarks_path(@article), method: :post, class: "btn btn-outline-success btn-sm" %>
+              <%= link_to image_tag("https://1.bp.blogspot.com/-v5xej9JBjFo/Xbo7NR9MRPI/AAAAAAABVz8/HFpWUtiHzIwYGhxHzS3IzXtYDjNUnOMqACNcBGAsYHQ/s400/kotowaza_mekara_uroko_man.png", style: "width:25px;"), article_stamps_path(@article, type: '目から鱗'), method: :post, class: "btn btn-outline-success btn-sm" %>
             <% end %>
-            <span class="ms-2">ブックマークの虫</span>
+            <span class="px-2p"><%= @stamps_count[:目から鱗] %></span>
           </div>
+          <div class="container my-2 px-0">
+            <% if @article.stamped_by?(current_user, 'ゴリラ') %>
+              <%= link_to image_tag("https://2.bp.blogspot.com/-ruMSXp-w-qk/XDXbUFVC3FI/AAAAAAABQ-8/QRyKKr--u9E1-Rvy2SQqt0QPWeq1ME6wgCLcBGAs/s400/animal_gorilla.png", style: "width:25px;"), article_stamps_path(@article, type: 'ゴリラ'), method: :delete, class: "btn btn-success btn-sm" %>
+            <% else %>
+              <%= link_to image_tag("https://2.bp.blogspot.com/-ruMSXp-w-qk/XDXbUFVC3FI/AAAAAAABQ-8/QRyKKr--u9E1-Rvy2SQqt0QPWeq1ME6wgCLcBGAs/s400/animal_gorilla.png", style: "width:25px;"), article_stamps_path(@article, type: 'ゴリラ'), method: :post, class: "btn btn-outline-success btn-sm" %>
+            <% end %>
+            <span class="px-2p"><%= @stamps_count[:ゴリラ] %></span>
+          </div>
+        </div>
+        <div class="bookmark-container d-md-flex container my-2 px-0 py-2 width-80">
+        <% if @article.bookmarked_by?(current_user) %>
+          <%= link_to image_tag("https://1.bp.blogspot.com/-p_wQYdgwfxo/XUjdtFC4xYI/AAAAAAABT_A/FIc5vPwclkEeKdy98I9AXm309qtfJBrLwCLcBGAs/s400/book_hon_no_mushi_man_bug.png", style: "width:35px;"), article_bookmarks_path(@article), method: :delete, class: "btn btn-success btn-sm" %>
+          <p class="ms-2">ブックマークの虫を削除!</p>
+        <% else %>
+          <%= link_to image_tag("https://1.bp.blogspot.com/-p_wQYdgwfxo/XUjdtFC4xYI/AAAAAAABT_A/FIc5vPwclkEeKdy98I9AXm309qtfJBrLwCLcBGAs/s400/book_hon_no_mushi_man_bug.png", style: "width:35px;"), article_bookmarks_path(@article), method: :post, class: "btn btn-outline-success btn-sm" %>
+          <p class="ms-2">ブックマークの虫になる!</p>
         <% end %>
-      </div>
-      <div class="container position-absolute position-fixed bottom-70 start-900">
-        <% if current_user&.author_or_not?(@article) %>
-          <%= link_to '記事を編集', edit_article_path, class: "btn btn-outline-dark me-2"%>
-          <%= link_to '記事を削除', article_path(@article), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-outline-danger" %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
+    <div class="container d-flex justify-content-center my-4">
+      <% if current_user&.author_or_not?(@article) %>
+        <%= link_to '記事を編集', edit_article_path, class: "btn btn-outline-dark me-2"%>
+        <%= link_to '記事を削除', article_path(@article), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-outline-danger" %>
+      <% end %>
+    </div> 
   </div>
 </div>

@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>OHub</title>
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,46 +12,40 @@
   </head>
 
   <body>
-    <div class="container">
-      <div class="container">
-        <header class='d-flex flex-wrap justify-content-between py-2 mb-3 border-bottom'>
-          <div class="header-left d-flex">
-            <div class="mt-2 text-center" style="weight: 200px;">
-              <%= link_to('O-TechHub', articles_path, class: "text-dark text-decoration-none h1") %>
-              <p class="subheading my-0">オーテックハブ</p>
-            </div>
-            <div class="mx-4 pt-4" style="height: 1.375rem;">
-              <p class="header-left-right font-weight-bold">オリエンテーリングの技術記事投稿サイト</p>
-            </div>
-            <% if flash %>
-              <p class="pt-4 text-primary"><%= notice %></p>
-            <% end %>
-          </div>
-          <div class="header-right d-flex">
-            <% if current_user %>
-              <%= button_to('記事作成', new_article_path, method: :get, class: "btn btn-outline-dark", data: { disable_with: 'ナビゲーション中' }) %>
-              <div class="dropdown mx-3">
-                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  <%= current_user.last_name %>
-                  <img src="https://1.bp.blogspot.com/-7d0Ty0HTICI/V4SA6emmiwI/AAAAAAAA8N4/JNfzdM6_MdcXmQm3TOv8paAJLjLPP-NoQCLcB/s800/character_gorilla_hardboiled.png" class="mx-1" style="width: 25px">
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><%= link_to('マイプロフィール', user_path(session[:user_id]), class: "text-dark text-decoration-none dropdown-item") %></li>
-                  <li><%= link_to('マイページ', user_mypages_path(session[:user_id]), class: "text-dark text-decoration-none dropdown-item") %></li>
-                  <li><%= link_to('ログアウトするっほ', logout_path, method: :delete, class: "text-dark text-decoration-none dropdown-item") %></li>
-                </ul>
-              </div>
-            <% else %>
-              <div class="container">
-                <%= link_to 'ログインする方はこちら', login_path, class: "btn btn-outline-secondary" %>
-              </div>
-            <% end %>
-          </div>
-        </header>
+    <header id="header" class='d-flex flex-wrap justify-content-between py-2 px-4 border-bottom'>
+      <div class="header-left d-flex">
+        <div class="mt-2 text-center" style="weight: 200px;">
+          <%= link_to('O-TechHub', articles_path, class: "text-white text-decoration-none h2") %>
+          <p class="subheading my-0">オーテックハブ</p>
+        </div>
+        <div class="mx-4 pt-4" style="height: 1.375rem;">
+          <p class="header-left-right font-weight-bold">オリエンテーリングの技術記事投稿サイト</p>
+        </div>
+        <% if flash %>
+          <p class="pt-4 flash"><%= notice %></p>
+        <% end %>
       </div>
-    </div>
+      <div class="header-right d-flex">
+        <% if current_user %>
+          <%= button_to('記事作成', new_article_path, method: :get, class: "btn btn-outline-light", data: { disable_with: 'ナビゲーション中' }) %>
+          <div class="dropdown mx-3">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.first_name %>
+              <i class="fab fa-mailchimp"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><%= link_to('マイプロフィール', user_path(session[:user_id]), class: "text-dark text-decoration-none dropdown-item") %></li>
+              <li><%= link_to('ログアウトするっほ', logout_path, method: :delete, data: { confirm: 'ログアウトしますか？' }, class: "text-dark text-decoration-none dropdown-item") %></li>
+            </ul>
+          </div>
+        <% else %>
+          <div class="container">
+            <%= link_to 'ログインする方はこちら', login_path, class: "btn btn-outline-light" %>
+          </div>
+        <% end %>
+      </div>
+    </header>
 
-      <%= yield %>
-
+    <%= yield %>
   </body>
 </html>

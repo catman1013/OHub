@@ -16,9 +16,21 @@
  @import 'bootstrap';
  @import 'partial/*';
 
-// .body {
-//   height: 100%;
-// }
+header {
+  background-color:#038d58;
+  color: white;
+  .flash {
+    text: dark;
+  }
+}
+
+body {
+  margin: 0;
+  background-image: url("<%= asset_path('goodsunshine.jpg') %>");
+  background-size:cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 
 .subheading {
   font-size: 0.8em;
@@ -32,15 +44,25 @@ a {
 }
 
 .article-box {
-  width:300px;
+  width:20vw;
+  min-width:200px;
+  background-color: #fff;
 }
 
 .width-100vw {
-  width:100vw;
+  width:100%;
 }
 
 .width-100 {
   width:100%;
+}
+
+.width-80 {
+  width:80%;
+}
+
+.width-70 {
+  width:70%;
 }
 
 .width-60 {
@@ -51,6 +73,10 @@ a {
   width:50%;
 }
 
+.width-30 {
+  width:30%;
+}
+
 .width-20 {
   width:20%;
 }
@@ -59,16 +85,47 @@ a {
   width:auto;
 }
 
+.width80vw {
+  width:80vw;
+}
 
-.height-80vh {
-  height:80vh;
+.min-w20px {
+  min-width:100px;
+}
+
+.max-w80 {
+  max-width:80%;
+}
+
+.max-w80 {
+  max-width:80%;
+}
+
+.max-w300px {
+  max-width:300px;
+}
+
+.height-100vh {
+  height:100vh;
 }
 .height-50vh {
   height:50vh;
 }
 
+.height-10 {
+  height:10%;
+}
+
+.height-50 {
+  height:50%;
+}
+
 .height-100 {
   height:100%;
+}
+
+.min-height {
+  min-height:80vh
 }
 
 .height-auto {
@@ -80,14 +137,263 @@ a {
 }
 
 .top-40 {
-  top:30%;
+  top:40%;
 }
 
-.back-image {
-  background-image: url("<%= asset_path('hogehoge.png') %>");
-  background-size:cover;
+.top-70 {
+  top:70%;
+}
+
+.bottom-0 {
+  bottom:0%;
+}
+
+.p-5 {
+  padding: 5%;
+}
+.py-4p {
+  padding-top: 4%;
+  padding-bottom: 4%;
+}
+.px-2p {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.border-comment {
+  padding-bottom: 8px;
+  border-bottom: 1px #000 solid;
+}
+
+.overflow-wrap {
+  overflow-wrap: break-word;
+  word-wrap: break-all;
+}
+
+.row-4 {
+  height: calc( 1.3em * 4 );
+  line-height: 1.3;
+}
+
+#paginate {
+  color:white;
 }
 
 .back-white {
   background-color: rgba(255,255,255,0.9);
+}
+
+.fs-10 {
+  font-size: 0.6em;
+}
+
+.fs-8 {
+  font-size: 0.8em;
+}
+
+.back-gray:hover {
+  background-color: #fff7c5;
+  box-shadow: none;
+  border: none;
+}
+.back-red:hover {
+  background-color: #FFBAAA;
+  box-shadow: none;
+  border: none;
+}
+.back-green:hover {
+  background-color: #AAFFBE;
+  box-shadow: none;
+  border: none;
+}
+.back-blue:hover {
+  background-color: #98e2ff;
+  box-shadow: none;
+  border: none;
+}
+
+.after-link::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: auto;
+  content: "";
+  background-color: transparent;
+}
+
+.after-link2 {
+  z-index: 2;
+}
+
+.article-box {
+	-webkit-transition:	all 0.4s ease;
+	transition: all 0.2s;
+}
+
+//article_index------------------
+.index-container {
+  .btn-wrapper {
+    background-color: #fff;
+    color: #363636;
+    .nav-btn {
+      background-color: #fff;
+    }
+    .fa-paw {
+      color: #646464;
+    }
+  }
+  .article-wrapper {
+    .name-btn {
+      border-color: #4d4d4d;
+      color: black;
+    }
+    .name-btn:hover {
+      background-color: #5f5f5f;
+      color: white;
+    }
+  }
+  .pagenation a{
+    color: #4d4d4d;
+  }
+}
+
+//user_show------------------
+#mypage-container {
+  width: 80%;
+  .mypage-profile {
+    background-color: rgba(255, 255, 255, 0.5);
+    .myp {
+      margin-top: 16px;
+      font-weight: bold;
+    }
+    .profile-icon {
+      font-size: 12vw;
+      color: #AA5C00;
+    }
+  }
+  
+  .text-profile {
+    text-align: right;
+    margin-top: 20px;
+  }
+  .account-btn {
+    justify-content: end;
+  }
+}
+
+//メディアクエリ------------------
+@media (max-width:768px) {
+  .index-container {
+    .dropdown-menu{
+      margin-left: 16px;
+    }
+  }
+  #comments{
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+      .comment-container {
+        padding: 10px;
+      }
+      p {
+        text-align: center;
+        font-sixe: 1.2rem;
+      }
+      .bookmark-container {
+        display: flex;
+        flex-direction: column;
+          p {
+            text-align: center;
+            margin-top: 8px;
+          }
+      }
+      .comment-btn{
+        justify-content: center;
+      }
+      .comment-delete-btn {
+        justify-content: center;
+      }
+  }
+
+  #mypage-container {
+    .mypage-profile {
+      width: 80%;
+      border: 1px solid #CCC;
+      background-color: rgba(255,255,255,0.9);
+      color: black;
+        
+        .profile-icon {
+          text-align: center;
+          font-size: 25vw;
+          color: black;
+          }
+
+      .text-profile {
+        padding-left: 15%;
+        text-align: center;
+        margin-bottom: 4px;
+          p {
+            margin-bottom: 0;
+            margin-top: 2px;
+            padding-bottom: 3%;
+            font-size: 1.05rem;
+          }
+      }
+
+      .account-btn {
+        justify-content: center;
+      }
+    }
+
+    .articles-container {
+      .article-boxes {
+        flex-direction: column;
+        align-items: center;
+      }
+      .button-container {
+        justify-content: center;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  #article-form-container {
+      display: flex;
+      flex-direction: column;
+      .radio-group {
+        margin-top: 0;
+      }
+      .category-select {
+
+      }
+      .content-form {
+        margin-top: 16px;
+      }
+      .submit-btn {
+        margin-top: 16px;
+        justify-content: end;
+      }
+  }
+
+
+  .edit-user-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+      th {
+          display: block;
+          width: 100%;
+          text-align: start;
+          margin-bottom: 0;
+          margin-top: 10px;
+        }
+        
+      td {
+        display: block;
+        width: 100%;
+      }
+  }
 }
