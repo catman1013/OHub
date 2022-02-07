@@ -2,8 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.w-nav {
-  width: 200px;
+.border-bottom {
+  border-bottom: 2px solid;
 }
 
 .border-right {
@@ -11,35 +11,158 @@
 }
 
 .border-red {
-  border-color: #ff8989;
+  border-color: #FFBAAA;
 }
 .border-green {
-  border-color: #89ff97;
+  border-color: #AAFFBE;
 }
 .border-blue {
-  border-color: #89b6ff;
+  border-color: #AAFFFC;
 }
+.border-gray {
+  border-color: #fff7c5;
+}
+
 
 .btn-no-border {
   border:none;
 }
 
 .category-select {
-  // width: auto;
+  color: white;
 }
 .textarea {
-  width: auto;
   height:100px;
 }
 
-.bottom-70 {
-  bottom:70px;
+.bottom-10 {
+  bottom:10%;
 }
-.start-1100 {
-  left:1100px;
+.start-75 {
+  left:75%;
 }
 
 .back-black {
   background-color:rgb(77, 75, 75);
   color:white;
+}
+
+.form-group{
+  position: relative;
+  margin: 0;
+}
+
+// ----_article_formの入力フォーム------------
+.title-label,.content-label{
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  font-size: 16px;
+  color: #4d4d4d;
+  transition: all 0.25s ease;
+}
+
+.title-textbox, .content-textbox{
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #2b2b2b;
+  outline: none;
+}
+
+.title-textbox:hover, .content-textbox:hover{
+  background-color: #e7faff;
+  border-width: thin;
+  border: thin solid #ffffff;
+}
+
+// ------------絞り込みボタンカラー----------------------------------
+
+.sort-gray:hover {
+  background-color: #fff7c5;
+}
+.sort-red:hover {
+  background-color: #FFBAAA;
+}
+.sort-green:hover {
+  background-color: #AAFFBE;
+}
+.sort-blue:hover {
+  background-color: #98e2ff;
+}
+
+
+// 絞り込みボタン表示------------------------
+#tech_parent:hover .list-children {
+    display: block;
+}
+
+#comments {
+  width: 30%;
+  max-width: 300px;
+  margin:2%;
+  padding-top: 16px;
+    .comment-btn{
+      justify-content: flex-start;
+    }
+    .comment-delete-btn {
+      justify-content: flex-start;
+      margin-top: 2px;
+      margin-bottom:16px;
+    }
+}
+
+
+.mypage-profile {
+  width:30%;
+  min-width: 165px;
+}
+.mypage-profile img {
+  width:80%;
+}
+.articles-container {
+  color: black;
+}
+.article-boxes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button-container {
+  display: flex;
+  padding-left: 0px;
+}
+
+.text-profile {
+  margin-top: 10%;
+  margin-bottom: 10%;
+    p {
+      margin-bottom: 0;
+      padding-bottom: 3%;
+    }
+}
+
+.delete-btn {
+  border-color:rgb(246, 143, 255);
+  font-size: 8px;
+  color:rgb(246, 143, 255);
+  this:hover {
+    border-color:rgb(77, 75, 75);
+  }
+}
+
+.edit-user-container {
+  color:white;
+  height: 80vh;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+    th {
+      text-align: end;
+      font-weight: normal;
+    }
 }

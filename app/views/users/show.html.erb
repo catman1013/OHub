@@ -1,55 +1,56 @@
-<div class="container">
-  <div class="container my-4">
-    <% if current_user&.current_user_or_not?(@user) %>
-      <h5>マイプロフィール</h5>
-    <% else %>
-      <h1><%= @user.first_name %></h1>
-    <% end %>
-  </div>
-  <div class="container d-flex">
-    <div class="container mx-0" style="width:20%">
-      <img src="https://1.bp.blogspot.com/-7d0Ty0HTICI/V4SA6emmiwI/AAAAAAAA8N4/JNfzdM6_MdcXmQm3TOv8paAJLjLPP-NoQCLcB/s800/character_gorilla_hardboiled.png" class="mx-1 border border-dark" style="width: 100%">
-      <div class="container text-end my-4">
-        <p><%= @user.first_name %></p>
-        <p><%= @user.last_name %></p>
-        <p>歴<%= @user.orien_started_at %>〜</p>
-        <p>現所属<%= @user.affilication %></p>
-        <p><%= @user.university %>大学<%= @user.entered_university_at %>年度入学</p>
-        <p><%= @user.favorite_terrain %></p>
-        <p><%= @user.favorite_event_i18n%></p>
-        <p><%= @user.achievement %></p>
-        <p><%= @user.something_to_say %></p>
-      </div>
+<div class="container d-md-flex py-4" id="mypage-container">
+  <div class="container mypage-profile rounded">
+    <div class="container py-2 text-center">
+      <% if current_user&.current_user_or_not?(@user) %>
+        <p class="fs-6 myp">マイプロフィール</p>
+        <i class="fab fa-mailchimp profile-icon"></i>
+      <% else %>
+        <p class="fs-6 myp"><%= @user.first_name %></p>
+        <i class="fab fa-napster profile-icon"></i>
+      <% end %>
+    </div>
+    <div class="px-4 container text-profile">
+      <p><%= @user.first_name %><%= @user.last_name %></p>
+      <p>歴<%= @user.orien_started_at %>〜</p>
+      <p><%= @user.affilication %>所属</p>
+      <p><%= @user.university %>大学<%= @user.entered_university_at %>年度入学</p>
+      <p><%= @user.favorite_terrain %></p>
+      <p><%= @user.favorite_event_i18n%></p>
+      <p><%= @user.achievement %></p>
+      <p><%= @user.something_to_say %></p>
     </div>
     <div class="container">
-      <div class="container d-flex mb-2">
-        <div class="ms-2"><%= button_to "全ての記事を表示", user_path(current_user), method: :get, class: 'btn btn-outline-warning' %></div>
-        <div class="ms-2"><%= button_to t('enums.article.status.published')+"記事のみ表示", { controller: :users, action: :show }, params: { status: 'published' }, method: :get, class: 'btn btn-outline-warning' %></div>
-        <div class="ms-2"><%= button_to t('enums.article.status.draft')+"記事のみ表示", { controller: :users, action: :show }, params: { status: 'draft' }, method: :get, class: 'btn btn-outline-warning' %></div>
-        </div>
-      <div class="d-flex flex-wrap my-4">
-        <% @articles.each do |article|%>
-          <div class="container mx-2 my-2 py-3 px-4 shadow article-box border-right">
-            <p><%= "#{article.created_at.year}/#{article.created_at.month}/#{article.created_at.day}"%></p>
-            <h5><%= article.title.truncate(20) %></h5>
-            <p><%= article.content.truncate(42) %></p>
-            <p class="categorypara"><%= article.category_i18n %></p>
-            <%= link_to '詳細', article %>
-            <% if current_user&.author_or_not?(article) %>
-              <%= link_to '編集', edit_article_path(article) %>
-              <%= link_to '削除', article_path(article), remote: :true, method: :delete, data: { confirm: '削除しますか？' } %>
-            <% end %>
-          </div>
+      <% if current_user&.current_user_or_not?(@user) %>
+        <p class="mt-2 mb-4 d-flex account-btn"><%= link_to 'アカウント設定', edit_user_path(session[:user_id]), class: "btn btn-dark" %></p>
+      <% end %>
+    </div>
+  </div>
+  <div class="container py-2 articles-container">
+    <div class="d-md-flex">
+      <div class="container mb-2 button-container">
+        <% if current_user&.current_user_or_not?(@user) %>
+        <div class="ms-2 button"><%= button_to "全ての記事", user_path(current_user), method: :get, class: 'btn btn-light' %></div>
+        <div class="ms-2 button"><%= button_to t('enums.article.status.published')+"記事", { controller: :users, action: :show }, params: { status: 'published' }, method: :get, class: 'btn btn-light' %></div>
+        <div class="ms-2 button"><%= button_to t('enums.article.status.draft')+"記事", { controller: :users, action: :show }, params: { status: 'draft' }, method: :get, class: 'btn btn-light' %></div>
         <% end %>
       </div>
       <div>
         <%= paginate @articles %>
       </div>
-      <div class="d-flex justify-content-end mb-4 me-4">
-      <% if current_user&.current_user_or_not?(@user) %>
-        <%= link_to 'アカウント設定', edit_user_path(session[:user_id]), class: "btn btn-outline-dark" %>
+    </div>
+    <div class="article-boxes">
+      <% @articles.each do |article|%>
+        <div class="container mx-2 my-2 py-3 px-4 shadow article-box border-right position-relative <%=article.article_color[0] %>">
+          <p><%= "#{article.created_at.year}/#{article.created_at.month}/#{article.created_at.day}"%></p>
+          <h5><%= article.title.truncate(20) %></h5>
+          <p class="overflow-wrap"><%= article.content.truncate(42) %></p>
+          <%= link_to '詳細', article, class: "btn btn-outline-dark mt-1" %>
+          <% if current_user&.author_or_not?(article) %>
+            <%= link_to '編集', edit_article_path(article), class: "btn btn-outline-dark mt-1" %>
+            <%= link_to '削除', article_path(article), remote: :true, method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-outline-dark mt-1" %>
+          <% end %>
+        </div>
       <% end %>
-      </div>
     </div>
   </div>
 </div>

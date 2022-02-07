@@ -1,64 +1,65 @@
-<div class="container d-flex px-0">
-  <div class="container w-nav px-0">
-    <h3 class="mb-4 d-flex justify-content-end">技術記事</h3>
-    <div class='my-2 d-flex justify-content-end'>
-      <%= button_to("全表示", articles_path, method: :get, class: "btn btn-outline-dark btn-no-border", data: { disable_with: 'ナビゲーション中' }) %>
+<div class="index-container">
+  <nav class="btn-wrapper container-fluid d-flex justify-content-start align-items-center navbar navbar-expand-sm navbar-light mb-2 px-4 py-0">
+    <button class="nav-btn navbar-toggler my-2 p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-paw"></i>
+    </button>
+    <span class="p-2">カテゴリーから探す</span>
+    <div class="mx-2 navbar-nav collapse navbar-collapse" id="navbarSupportedContent">
+      <ul id="sortul" class="d-flex align-items-center navbar-nav me-auto">
+        <li class="nav-item p-2 "><%= link_to("全記事表示", articles_path, method: :get, class: "sort-gray text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' }) %></li>
+        <li class="nav-item p-2 "><%= link_to t('enums.article.category.mind'), articles_path( category: 'mind' ), params: { category: 'mind' }, method: :get, class: "sort-red text-dark text-decoration-none border-left border-red" , data: { disable_with: 'ナビゲーション中' } %></li>
+        <li class="nav-item dropdown p-2 d-flex">
+          <%= link_to t('enums.article.category.technic'), articles_path( category: 'technic' ), method: :get, class: "sort-green text-dark text-decoration-none border-left border-green", id: "tech-btn", data: { disable_with: 'ナビゲーション中' } %>
+          <a class="p-0 nav-link dropdown-toggle mx-0" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><%= link_to t('enums.article.tech_category.contaring'), articles_path( category: 'technic', tech_category: 'contaring' ), method: :get, class: "dropdown-item sort text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
+            <li><%= link_to t('enums.article.tech_category.go_straight'), articles_path( category: 'technic', tech_category: 'go_straight' ), method: :get, class: "dropdown-item sort text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
+            <li><%= link_to t('enums.article.tech_category.take_a_direction'), articles_path( category: 'technic', tech_category: 'take_a_direction' ), method: :get, class: "dropdown-item sort text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
+          </ul>
+        </li>
+        <li class="nav-item p-2 "><%= link_to t('enums.article.category.physical'), articles_path( category: 'physical' ), method: :get, class: "sort-blue text-dark text-decoration-none border-left border-blue", data: { disable_with: 'ナビゲーション中' } %></li>
+        <li class="nav-item p-2 "><%= link_to t('enums.article.category.strategy'), articles_path( category: 'strategy' ), method: :get, class: "sort-gray text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
+        <li class="nav-item p-2 "><%= link_to t('enums.article.category.theory'), articles_path( category: 'theory' ), method: :get, class: "sort-gray text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
+      </ul> 
     </div>
-    <div class='my-2 d-flex justify-content-end border-right border-red'>
-      <%= button_to(t('enums.article.category.mind')+"", { controller: :articles, action: :index }, params: { category: 'mind' }, method: :get, class: "btn btn-outline-dark btn-no-border border-warning", data: { disable_with: 'ナビゲーション中' }) %>
-    </div>
-    <div class='my-2 d-flex justify-content-end border-right border-green'>
-      <%= button_to(t('enums.article.category.technic')+"", { controller: :articles, action: :index }, params: { category: 'technic' }, method: :get, class: "btn btn-outline-dark btn-no-border tech_btn border-success", data: { disable_with: 'ナビゲーション中' }) %>
-    </div>
-    <div id='tech_category_btn_group'>
-      <div class='my-2 d-flex justify-content-end'>
-        <%= button_to(t('enums.article.tech_category.contaring')+"", { controller: :articles, action: :index }, params: { tech_category: 'contaring' }, method: :get, class: "btn btn-outline-dark btn-no-border btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
-      </div>
-      <div class='my-2 d-flex justify-content-end'>
-        <%= button_to(t('enums.article.tech_category.go_straight')+"", { controller: :articles, action: :index }, params: { tech_category: 'go_straight' }, method: :get, class: "btn btn-outline-dark btn-no-border btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
-      </div>
-      <div class='my-2 d-flex justify-content-end'>
-        <%= button_to(t('enums.article.tech_category.take_a_direction')+"", { controller: :articles, action: :index }, params: { tech_category: 'take_a_direction' }, method: :get, class: "btn btn-outline-dark btn-no-border btn-sm", data: { disable_with: 'ナビゲーション中' }) %>
-      </div>
-    </div>
-    <div class='my-2 d-flex justify-content-end d-flex justify-content-end border-right border-blue'>
-      <%= button_to(t('enums.article.category.physical')+"", { controller: :articles, action: :index }, params: { category: 'physical' }, method: :get, class: "btn btn-outline-dark btn-no-border border-primary", data: { disable_with: 'ナビゲーション中' }) %>
-    </div>
-    <div class='my-2 d-flex justify-content-end'>
-      <%= button_to(t('enums.article.category.strategy')+"", { controller: :articles, action: :index }, params: { category: 'strategy' }, method: :get, class: "btn btn-outline-dark btn-no-border", data: { disable_with: 'ナビゲーション中' }) %>
-    </div>
-    <div class='my-2 d-flex justify-content-end'>
-      <%= button_to(t('enums.article.category.theory')+"", { controller: :articles, action: :index }, params: { category: 'theory' }, method: :get, class: "btn btn-outline-dark btn-no-border", data: { disable_with: 'ナビゲーション中' }) %>
-    </div>
-  </div>
+  </nav>
 
-  <div class="container mx-4">
-    <div class="container d-flex">
-      <div>
-        <p class="pan" id="pan"><%= @category %></p>
+  <div class="container mx-4 article-wrapper">
+    <div class="container d-flex text-white">
+      <div class="me-4">
+        <span class="pagenation"><%= paginate @articles %></span>
       </div>
-      <div class="ms-4">
-        <span><%= paginate @articles %></span>
+      <div class="d-flex">
+        <p><%= t(@category) %><%= ">"+@tech_category if @tech_category%></p>
       </div>
     </div>
-    <div class="d-flex flex-wrap">
+    <div class="d-flex flex-wrap position-relative width-80">
       <% @articles.each do |article|%>
-        <div class="container mx-2 my-2 py-3 px-4 shadow article-box border-right">
-          <p><%= "#{article.created_at.year}/#{article.created_at.month}/#{article.created_at.day}"%></p>
-          <h5><%= article.title.truncate(20) %></h5>
-          <p><%= article.content.truncate(42) %></p>
-          <p>
-            <% if current_user&.author_or_not?(article) %>
-              <%= article.user.first_name %>
-            <% else %>
-              <%= link_to article.user.first_name, user_path(article.user_id), class: "text-dark text-decoration-none" %>
-            <% end %>
-          </p>
-          <p class="categorypara"><%= article.category_i18n %></p>
-          <%= link_to '詳細', article %>
+        <div class="container mx-2 my-2 py-3 px-4 shadow article-box border-right rounded-top position-relative <%= article.article_color[0] %> <%=article.article_color[1] %>">
+          <p class="fs-10 mb-2 fw-light"><%= "#{article.created_at.year}/#{article.created_at.month}/#{article.created_at.day}"%></p>
+          <h4 class="fw-bold"><%= article.title.truncate(20) %></h4>
+          <p class="fs-8 fw-light overflow-wrap mt-2"><%= article.content.truncate(30) %></p>
+          <div class="position-relative after-link2">
+            <p>
+              <% if current_user&.author_or_not?(article) %>
+                <i class="fab fa-mailchimp pe-2"></i>
+              <% else %>
+                <i class="fab fa-napster pe-2"></i>
+              <% end %>
+              <%= link_to article.user.first_name+article.user.last_name, user_path(article.user_id), class: "name-btn p-2 rounded name-link text-decoration-none" %>
+            </p>
+          </div>
+          <%= link_to '', article, class: 'after-link text-dark text-decoration-none' %>
+          <span><i class="far fa-grin-alt pe-2"></i><%= article.stamps.count %></span>
         </div>
       <% end %>
     </div>
-    <%= paginate @articles %>
+    <div class="container d-flex text-white">
+      <div class="me-4">
+        <span class="pagenation"><%= paginate @articles %></span>
+      </div>
+    </div>
   </div>
 </div>
+
