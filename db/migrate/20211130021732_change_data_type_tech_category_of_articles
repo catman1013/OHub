@@ -1,8 +1,10 @@
 class ChangeDataTypeTechCategoryOfArticles < ActiveRecord::Migration[5.2]
   def up
+    change_column :articles, :category, 'integer USING CAST(category AS integer)'
     change_column :articles, :tech_category, 'integer USING CAST(tech_category AS integer)'
   end
   def down
+    change_column :articles, :category, :string
     change_column :articles, :tech_category, :string
   end
 end
