@@ -6,37 +6,34 @@
       <p>オリエンテーリング技術記事投稿サイト</p>
     </div>
     <div class="container width-50 mx-auto me-2">
-      <%= form_with scope: :session, local: true do |f| %>
-      <%= render 'layouts/error_messages', model: f.object %>
-      <table class="d-flex justify-content-center form-table my-4">
-        <tbody>
-          <tr>
-            <td><%= f.text_field :first_name, placeholder: "姓" %></td>
-          </tr>
-          <tr>
-            <td><%= f.text_field :last_name, placeholder: "名" %></td>
-          </tr>
-          <tr>
-            <td><%= f.text_field :email, placeholder: "メールアドレス" %></td>
-          </tr>
-          <tr>
-            <td><%= f.password_field :password, placeholder: "パスワード" %></td>
-          </tr>
-          <tr>
-            <td><%= f.password_field :password_confirmation, placeholder: "パスワード確認" %></td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="d-flex justify-content-center form-table my-4">
-        <tbody>
-          <tr class="text-end">
-            <td><%= f.submit 'アカウント作成', class: "btn btn-dark" %></td>
-          </tr>
-          <tr class="text-end">
-            <td><%= link_to 'ログインはこちら', login_path, class: "btn btn-outline-dark btn-sm mt-2" %></td>
-          </tr>
-        </tbody>
-      </table>
+      <%= form_with model: @user, local: true do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
+        <table class="d-flex justify-content-center form-table my-4">
+          <tbody>
+            <tr>
+              <td><%= f.text_field :first_name, placeholder: "姓" %></td>
+            </tr>
+            <tr>
+              <td><%= f.text_field :email, placeholder: "メールアドレス" %></td>
+            </tr>
+            <tr>
+              <td><%= f.password_field :password, placeholder: "パスワード(8文字以上)" %></td>
+            </tr>
+            <tr>
+              <td><%= f.password_field :password_confirmation, placeholder: "パスワード確認" %></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="d-flex justify-content-center form-table my-4">
+          <tbody>
+            <tr class="text-end">
+              <td><%= f.submit 'アカウント作成', class: "btn btn-dark" %></td>
+            </tr>
+            <tr class="text-end">
+              <td><%= link_to 'ログインはこちら', login_path, class: "btn btn-outline-dark btn-sm mt-2" %></td>
+            </tr>
+          </tbody>
+        </table>
       <% end %>
     </div>
   </div>

@@ -4,7 +4,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w.+-]+@([\w][\w]*[\w]*\.)+[a-zA-Z]{2,}/.freeze
 
   validates :first_name, presence: true, length: { maximum: 10 }
-  validates :last_name, presence: true, length: { maximum: 10 }
+  validates :last_name, length: { maximum: 10 }
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: VALID_EMAIL_REGEX, message: '有効なメールアドレスを入力してうほ'}
   validates :password, presence: true, length: { minimum: 8, allow_blank: true}, on: create

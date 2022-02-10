@@ -11,13 +11,10 @@
       <table class="d-flex justify-content-center form-table my-4">
         <tbody>
           <tr>
-            <td><%= f.text_field :first_name, placeholder: "姓" %></td>
-          </tr>
-          <tr>
             <td><%= f.text_field :email, placeholder: "メールアドレス" %></td>
           </tr>
           <tr>
-            <td><%= f.text_field :password, placeholder: "パスワード" %></td>
+            <td><%= f.password_field :password, placeholder: "パスワード" %></td>
           </tr>
         </tbody>
       </table>

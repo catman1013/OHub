@@ -5,8 +5,7 @@ class CreateArticles < ActiveRecord::Migration[5.2]
       
       t.text :content
       t.boolean :released
-      #t.string :category
-      #t.string :tech_category
+      
       t.timestamps
     end
   end
