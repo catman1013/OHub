@@ -47,7 +47,7 @@
               <% else %>
                 <i class="fab fa-napster pe-2"></i>
               <% end %>
-              <%= link_to article.user.first_name+article.user.last_name, user_path(article.user_id), class: "name-btn p-2 rounded name-link text-decoration-none" %>
+              <%= link_to "#{article.user.first_name}#{article.user.last_name}", user_path(article.user_id), class: "name-btn p-2 rounded name-link text-decoration-none" %>
             </p>
           </div>
           <%= link_to '', article, class: 'after-link text-dark text-decoration-none' %>
