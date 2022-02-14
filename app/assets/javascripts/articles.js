@@ -1,13 +1,4 @@
 window.onload = function() {
-  document.querySelectorAll('td').forEach(function(td){
-    td.addEventListener('mouseover', function(e) {
-      e.currentTarget.style.backgroundColor = '#eff';
-    });
-
-    td.addEventListener('mouseout', function(e) {
-      e.currentTarget.style.backgroundColor = '';
-    });
-  });
 
   const radiobtngroup = document.getElementById('category');
   const radiobtnmind = document.getElementById('article_category_mind');
