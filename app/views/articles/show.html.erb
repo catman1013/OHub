@@ -1,7 +1,7 @@
 <div class="container d-md-flex justify-content-center" id="show-container">
   <div class="container back-white min-height max-w80 my-4 p-5 rounded-right">
     <p class="h4 overflow-wrap mx-0"><%= @article.title %></p>
-    <p class="overflow-wrap my-4"><%= @article.content %></p>
+    <p class="overflow-wrap my-4"><%= simple_format(@article.content) %></p>
   </div>
   <div class="container back-white mt-4 py-4p px-2p rounded-right" id="comments">
     <div class="container mx-0 mb-4 pt-2 border">
