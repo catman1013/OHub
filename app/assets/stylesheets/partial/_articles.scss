@@ -95,6 +95,14 @@
   background-color: #98e2ff;
 }
 
+.underbar {
+  box-sizing:border-box;
+  border-bottom: 2px solid #ffffff;
+}
+.underbar:hover {
+  border-bottom: 2px solid #858484;
+}
+
 
 // 絞り込みボタン表示------------------------
 #tech_parent:hover .list-children {

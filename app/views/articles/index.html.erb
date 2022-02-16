@@ -6,21 +6,21 @@
     <span class="p-2">カテゴリーから探す</span>
     <div class="mx-2 navbar-nav collapse navbar-collapse" id="navbarSupportedContent">
       <ul id="sortul" class="d-flex align-items-center navbar-nav me-auto">
-        <li class="nav-item p-2 "><%= link_to("全記事表示", articles_path, method: :get, class: "sort-gray text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' }) %></li>
-        <li class="nav-item p-2 "><%= link_to t('enums.article.category.mind'), articles_path( category: 'mind' ), params: { category: 'mind' }, method: :get, class: "sort-red text-dark text-decoration-none border-left border-red" , data: { disable_with: 'ナビゲーション中' } %></li>
-        <li class="nav-item dropdown p-2 d-flex">
-          <%= link_to t('enums.article.category.technic'), articles_path( category: 'technic' ), method: :get, class: "sort-green text-dark text-decoration-none border-left border-green", id: "tech-btn", data: { disable_with: 'ナビゲーション中' } %>
+        <li class="nav-item p-2 underbar"><%= link_to("全記事表示", articles_path, method: :get, class: "text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' }) %></li>
+        <li class="nav-item p-2 underbar"><%= link_to t('enums.article.category.mind'), articles_path( category: 'mind' ), params: { category: 'mind' }, method: :get, class: "text-dark text-decoration-none border-left border-red" , data: { disable_with: 'ナビゲーション中' } %></li>
+        <li class="nav-item dropdown p-2 d-flex underbar">
+          <%= link_to t('enums.article.category.technic'), articles_path( category: 'technic' ), method: :get, class: "text-dark text-decoration-none border-left border-green", id: "tech-btn", data: { disable_with: 'ナビゲーション中' } %>
           <a class="p-0 nav-link dropdown-toggle mx-0" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><%= link_to t('enums.article.tech_category.contaring'), articles_path( category: 'technic', tech_category: 'contaring' ), method: :get, class: "dropdown-item sort text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
-            <li><%= link_to t('enums.article.tech_category.go_straight'), articles_path( category: 'technic', tech_category: 'go_straight' ), method: :get, class: "dropdown-item sort text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
-            <li><%= link_to t('enums.article.tech_category.take_a_direction'), articles_path( category: 'technic', tech_category: 'take_a_direction' ), method: :get, class: "dropdown-item sort text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
+            <li><%= link_to t('enums.article.tech_category.contaring'), articles_path( category: 'technic', tech_category: 'contaring' ), method: :get, class: "dropdown-item text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
+            <li><%= link_to t('enums.article.tech_category.go_straight'), articles_path( category: 'technic', tech_category: 'go_straight' ), method: :get, class: "dropdown-item text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
+            <li><%= link_to t('enums.article.tech_category.take_a_direction'), articles_path( category: 'technic', tech_category: 'take_a_direction' ), method: :get, class: "dropdown-item text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
           </ul>
         </li>
-        <li class="nav-item p-2 "><%= link_to t('enums.article.category.physical'), articles_path( category: 'physical' ), method: :get, class: "sort-blue text-dark text-decoration-none border-left border-blue", data: { disable_with: 'ナビゲーション中' } %></li>
-        <li class="nav-item p-2 "><%= link_to t('enums.article.category.strategy'), articles_path( category: 'strategy' ), method: :get, class: "sort-gray text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
-        <li class="nav-item p-2 "><%= link_to t('enums.article.category.theory'), articles_path( category: 'theory' ), method: :get, class: "sort-gray text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
+        <li class="nav-item p-2 underbar"><%= link_to t('enums.article.category.physical'), articles_path( category: 'physical' ), method: :get, class: "text-dark text-decoration-none border-left border-blue", data: { disable_with: 'ナビゲーション中' } %></li>
+        <li class="nav-item p-2 underbar"><%= link_to t('enums.article.category.strategy'), articles_path( category: 'strategy' ), method: :get, class: "text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
+        <li class="nav-item p-2 underbar"><%= link_to t('enums.article.category.theory'), articles_path( category: 'theory' ), method: :get, class: "text-dark text-decoration-none", data: { disable_with: 'ナビゲーション中' } %></li>
       </ul> 
     </div>
   </nav>
